@@ -1296,6 +1296,222 @@ footer {
   }
 }
 
+
+/* =========================================================
+   KOI LAB · FINAL VIEWPORT LOCK
+   Final override: remove the outer frame, use the whole screen,
+   and keep the landscape layout on narrow portrait phones.
+   ========================================================= */
+:root {
+  --lab-topbar: 44px;
+  --edge-gap: clamp(0px, .35vw, 5px);
+}
+html,
+body {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+html {
+  position: fixed !important;
+  inset: 0 !important;
+  background: #f3ecdf !important;
+}
+body {
+  position: fixed !important;
+  inset: 0 auto auto 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-width: none !important;
+  transform: none !important;
+  background: linear-gradient(135deg, #f8f2e8 0%, #eee2d0 100%) !important;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box !important;
+}
+.topbar {
+  position: relative !important;
+  z-index: 20 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  flex: 0 0 var(--lab-topbar) !important;
+  width: 100% !important;
+  height: var(--lab-topbar) !important;
+  min-height: var(--lab-topbar) !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 2px 6px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+.topbar .home-origin-btn {
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+.fullscreen-btn {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  min-height: 30px !important;
+  max-width: 48vw !important;
+  padding: 5px 11px !important;
+  margin: 0 0 0 auto !important;
+  border: 1px solid rgba(121, 32, 42, .22) !important;
+  border-radius: 999px !important;
+  background: #fffaf2 !important;
+  color: #79202a !important;
+  box-shadow: 0 2px 9px rgba(43, 33, 28, .08) !important;
+  font: 700 11px/1.1 system-ui, sans-serif !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+.fullscreen-btn:hover { background: #f8eadd !important; }
+.wrap {
+  position: relative !important;
+  display: grid !important;
+  flex: 1 1 0 !important;
+  width: 100% !important;
+  height: calc(100vh - var(--lab-topbar)) !important;
+  height: calc(100dvh - var(--lab-topbar)) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: var(--edge-gap) !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  gap: clamp(4px, .55vw, 9px) !important;
+  grid-template-rows: minmax(74px, auto) minmax(50px, auto) minmax(10px, auto) minmax(0, 1fr) !important;
+}
+.wrap > header:not(.topbar) {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-radius: clamp(0px, .7vw, 12px) !important;
+}
+.mode-strip,
+.mode-disclaimer,
+.grid {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.grid {
+  min-height: 0 !important;
+  height: 100% !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: clamp(5px, .6vw, 10px) !important;
+}
+.grid > .panel,
+.grid > div:last-child,
+.grid > div:last-child > .panel {
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+.grid > .panel,
+.grid > div:last-child > .panel {
+  padding: clamp(7px, .75vw, 13px) !important;
+}
+.tiles { min-width: 0 !important; max-width: 100% !important; }
+footer { display: none !important; }
+
+/* Use a little more of a regular desktop / laptop display. */
+@media (min-width: 1000px) and (min-height: 650px) and (orientation: landscape) {
+  :root { --lab-topbar: 46px; --edge-gap: 3px; }
+  .wrap {
+    grid-template-rows: minmax(86px, auto) minmax(58px, auto) minmax(12px, auto) minmax(0, 1fr) !important;
+    gap: 7px !important;
+  }
+  .wrap > header:not(.topbar) { padding: 14px 22px !important; }
+  .grid > .panel,
+  .grid > div:last-child > .panel { padding: 12px !important; }
+  .tile { min-height: 60px; }
+}
+
+/* Portrait phone: rotate a single viewport-sized canvas into landscape. */
+@media (orientation: portrait) and (max-width: 900px) {
+  :root { --lab-topbar: 36px; --edge-gap: 2px; }
+  body {
+    inset: auto auto auto 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100dvh !important;
+    height: 100vw !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    transform: rotate(90deg) translateY(-100%) !important;
+    transform-origin: top left !important;
+  }
+  .topbar {
+    flex-basis: 36px !important;
+    width: 100% !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 2px 5px !important;
+  }
+  .home-origin-btn { min-height: 28px !important; padding: 2px 8px 2px 3px !important; gap: 5px !important; }
+  .home-origin-btn .btn-icon { width: 23px !important; height: 23px !important; }
+  .home-origin-btn .btn-text small { font-size: 6px !important; }
+  .home-origin-btn .btn-text strong { font-size: 11px !important; }
+  .fullscreen-btn { min-height: 25px !important; padding: 4px 8px !important; font-size: 10px !important; }
+  .wrap {
+    flex: 0 0 calc(100vw - 36px) !important;
+    width: 100% !important;
+    height: calc(100vw - 36px) !important;
+    min-height: 0 !important;
+    padding: 2px !important;
+    gap: 3px !important;
+    grid-template-rows: minmax(48px, auto) minmax(38px, auto) minmax(8px, auto) minmax(0, 1fr) !important;
+  }
+  .wrap > header:not(.topbar) { min-height: 0 !important; padding: 5px 8px !important; border-radius: 7px !important; }
+  .flaskmark { width: 29px !important; height: 29px !important; padding: 3px !important; }
+  h1 { font-size: .95rem !important; line-height: 1.05 !important; }
+  .sub { font-size: .58rem !important; line-height: 1.15 !important; margin-top: 2px !important; }
+  .stats { gap: 3px !important; }
+  .stats > div { min-width: 60px !important; padding: 4px 5px !important; font-size: .44rem !important; }
+  .stats b { font-size: .73rem !important; }
+  .mode-strip { min-height: 0 !important; padding: 4px 6px !important; gap: 5px !important; border-radius: 6px !important; }
+  .mode-copy strong { font-size: .68rem !important; }
+  .mode-copy > span:last-child { font-size: .48rem !important; line-height: 1.1 !important; }
+  .mode-button { padding: 5px 7px !important; font-size: .52rem !important; }
+  .mode-disclaimer { font-size: .43rem !important; line-height: 1 !important; }
+  .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 4px !important; }
+  .grid > .panel,
+  .grid > div:last-child > .panel { padding: 5px !important; border-radius: 6px !important; }
+  .grid > div:last-child { gap: 4px !important; }
+  .panel h2 { font-size: .49rem !important; margin-bottom: 4px !important; }
+  .searchbox { height: 24px !important; min-height: 24px !important; flex-basis: 24px !important; font-size: .53rem !important; }
+  .tiles { grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)) !important; gap: 3px !important; }
+  .tile { min-height: 38px !important; padding: 5px 3px !important; }
+  .tile .f { font-size: .62rem !important; }
+  .tile .n { font-size: .43rem !important; }
+  .btn, .btn.ghost { padding: 5px 6px !important; font-size: .5rem !important; }
+}
+
 </style>
 </head>
 <body>
@@ -4373,5 +4589,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+
+<script>
+/* One-tap browser fullscreen; user gesture is required by browsers. */
+(() => {
+  const bar = document.querySelector('.topbar');
+  if (!bar || document.querySelector('.fullscreen-btn')) return;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'fullscreen-btn';
+  button.setAttribute('aria-label', 'Bật hoặc tắt chế độ toàn màn hình');
+  const renderLabel = () => {
+    const active = Boolean(document.fullscreenElement);
+    button.textContent = active ? '⤢ Thoát toàn màn hình' : '⛶ Toàn màn hình';
+    button.title = active ? 'Thoát toàn màn hình' : 'Mở toàn màn hình';
+  };
+  button.addEventListener('click', async () => {
+    try {
+      if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          await document.documentElement.requestFullscreen({ navigationUI: 'hide' });
+        } else {
+          button.title = 'Trình duyệt này không hỗ trợ chế độ toàn màn hình bằng nút';
+          return;
+        }
+      } else if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      }
+    } catch (error) {
+      button.title = 'Không thể bật toàn màn hình trong trình duyệt này';
+    }
+    renderLabel();
+  });
+  document.addEventListener('fullscreenchange', renderLabel);
+  bar.appendChild(button);
+  renderLabel();
+})();
+</script>
+
 </body>
 </html>
