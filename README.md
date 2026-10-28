@@ -1,7 +1,8 @@
+
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Phòng Thí Nghiệm — Ghép Chất</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -998,6 +999,163 @@ footer{display:none !important}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 
+
+
+/* =========================================================
+   GITHUB PAGES · FULL-VIEWPORT / ANTI-SHRINK PATCH
+   Giữ nguyên logic ứng dụng; loại khoảng trống thừa quanh khung.
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+body { max-width: none !important; }
+.topbar {
+  width: 100%;
+  max-width: none !important;
+  padding-left: clamp(6px, .9vw, 14px) !important;
+  padding-right: clamp(6px, .9vw, 14px) !important;
+}
+.wrap {
+  width: 100%;
+  max-width: none !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: clamp(4px, .55vw, 9px) clamp(5px, .75vw, 12px) clamp(4px, .55vw, 8px) !important;
+  gap: clamp(4px, .55vw, 8px) !important;
+  grid-template-rows: minmax(74px, auto) minmax(50px, auto) minmax(12px, auto) minmax(0, 1fr);
+}
+.wrap > header:not(.topbar) {
+  min-width: 0;
+  padding: clamp(9px, 1vw, 16px) clamp(12px, 1.5vw, 22px);
+  margin: 0 !important;
+}
+.grid {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  gap: clamp(6px, .7vw, 11px) !important;
+}
+.grid > .panel,
+.grid > div:last-child > .panel {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Chế độ ngang ở máy tính / điện thoại đã xoay */
+@media (max-height: 700px) and (orientation: landscape) {
+  .wrap {
+    padding: 4px 7px 5px !important;
+    gap: 4px !important;
+    grid-template-rows: minmax(62px, auto) minmax(43px, auto) minmax(10px, auto) minmax(0, 1fr);
+  }
+  .wrap > header:not(.topbar) { padding: 7px 12px; }
+  .grid { gap: 6px !important; }
+}
+
+/* Điện thoại đang cầm dọc: xoay khung ứng dụng, nhưng không thu nhỏ chữ quá mức */
+@media (orientation: portrait) and (max-width: 900px) {
+  body {
+    position: fixed;
+    inset: auto;
+    top: 0;
+    left: 0;
+    width: 100dvh;
+    height: 100vw;
+    min-width: 0;
+    min-height: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+  }
+  .topbar {
+    width: 100%;
+    height: 38px;
+    min-height: 38px;
+    flex: 0 0 38px;
+    padding: 3px 7px !important;
+  }
+  .home-origin-btn { min-height: 31px; padding: 3px 10px 3px 4px; gap: 6px; }
+  .home-origin-btn .btn-icon { width: 25px; height: 25px; }
+  .home-origin-btn .btn-text small { font-size: 7px; }
+  .home-origin-btn .btn-text strong { font-size: 12px; }
+  .wrap {
+    width: 100%;
+    height: calc(100% - 38px);
+    min-height: 0;
+    flex: 1 1 auto;
+    padding: 4px 6px 5px !important;
+    gap: 4px !important;
+    grid-template-rows: minmax(54px, auto) minmax(43px, auto) minmax(10px, auto) minmax(0, 1fr);
+  }
+  .wrap > header:not(.topbar) {
+    min-height: 54px;
+    padding: 6px 10px;
+    gap: 7px;
+    border-radius: 10px;
+  }
+  .brand { gap: 7px; }
+  .flaskmark { width: 32px; height: 32px; padding: 3px; }
+  h1 { font-size: 1rem; line-height: 1.08; }
+  .sub { font-size: .62rem; line-height: 1.2; margin-top: 3px; }
+  .wrap > header:not(.topbar) .brand::after { display: none; }
+  .stats { gap: 4px; }
+  .stats > div { min-width: 68px; padding: 4px 6px; font-size: .48rem; border-radius: 7px; }
+  .stats b { font-size: .78rem; margin-top: 1px; }
+  .mode-strip { min-height: 43px; padding: 5px 8px; gap: 6px; border-radius: 9px; }
+  .eyebrow { font-size: .48rem; letter-spacing: .06em; }
+  .mode-copy strong { font-size: .72rem; line-height: 1.15; }
+  .mode-copy > span:last-child { max-width: 310px; font-size: .54rem; line-height: 1.15; }
+  .mode-switch { flex: 0 0 auto; padding: 2px; gap: 2px; border-radius: 7px; }
+  .mode-button { padding: 6px 8px; gap: 4px; border-radius: 6px; font-size: .58rem; }
+  .mode-button .mode-icon { font-size: .7rem; }
+  .mode-disclaimer { min-height: 10px; padding: 0 3px; font-size: .48rem; line-height: 1.1; }
+  .disclaimer-dot { width: 4px; height: 4px; }
+  .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px !important; }
+  .grid > .panel,
+  .grid > div:last-child > .panel { padding: 6px; border-radius: 9px; }
+  .grid > div:last-child { grid-template-rows: minmax(0, 1.13fr) minmax(0, .87fr); gap: 6px; }
+  .panel h2 { font-size: .57rem; letter-spacing: .06em; margin-bottom: 5px; }
+  .panel h2::before { width: 4px; height: 4px; }
+  .inventory-meta { margin: 0 0 4px; gap: 4px; font-size: .48rem; }
+  .searchbox { height: 27px; min-height: 27px; flex-basis: 27px; padding: 4px 7px; margin-bottom: 4px; font-size: .58rem; border-radius: 6px; }
+  .tabs { gap: 3px; margin-bottom: 4px; padding-bottom: 2px; }
+  .tab { padding: 4px 6px; font-size: .5rem; border-radius: 9px; }
+  .tiles { grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 4px; padding: 1px 2px 3px 0; }
+  .tile { min-height: 42px; padding: 6px 3px 4px; border-radius: 6px; }
+  .tile .catbar { height: 2px; }
+  .tile .f { font-size: .68rem; margin-bottom: 2px; }
+  .tile .n { font-size: .48rem; line-height: 1.08; }
+  .tile.locked::before { top: 2px; right: 3px; font-size: .52rem; }
+  .tiles.periodic-grid { grid-template-columns: repeat(18, minmax(0, 1fr)); grid-auto-rows: minmax(29px, 1fr); gap: 1px; }
+  .periodic-cell { min-height: 29px; padding: 5px 0 2px; }
+  .periodic-cell .atomic-number { top: 1px; left: 1px; font-size: .3rem; }
+  .periodic-cell .f { font-size: .46rem; margin-bottom: 1px; }
+  .periodic-cell .n { font-size: .29rem; max-height: 10px; }
+  .flaskzone { min-height: 32px; max-height: 49px; padding: 4px; gap: 3px; margin-bottom: 4px; border-radius: 6px; }
+  .flaskzone.empty::before { font-size: .54rem; }
+  .chip { padding: 3px 5px; font-size: .54rem; gap: 3px; }
+  .chip .f { font-size: .58rem; }
+  .chip .x { font-size: .52rem; }
+  .actions { gap: 4px; margin: 3px 0 4px; }
+  .btn, .btn.ghost { padding: 6px 7px; font-size: .55rem; border-radius: 6px; }
+  .result { padding: 6px; border-radius: 7px; margin-bottom: 3px; }
+  .result .eqline { font-size: .66rem; line-height: 1.25; }
+  .result .cond, .result .nuclear-note, .result .unlockline { font-size: .51rem; line-height: 1.25; margin-top: 3px; }
+  .log { gap: 3px; }
+  .logitem { padding: 4px 5px; font-size: .49rem; line-height: 1.2; }
+  .logitem b { font-size: .52rem; line-height: 1.2; }
+  .logitem .lcond { font-size: .44rem; margin-top: 2px; }
+}
+
 </style>
 </head>
 <body>
@@ -1078,7 +1236,7 @@ footer{display:none !important}
 </div>
 
 <footer>
-  Kho dữ liệu hiện có <b id="fCount">0</b> mục hóa chất, nguyên tố và hạt nhân và <b id="fReact">0</b> phương trình mô phỏng. Hãy xem điều kiện phản ứng như một phần của phương trình, không chỉ là dòng ghi chú.<br>
+  Kho hóa học: <b id="fCount">0</b> chất · Kho hạt nhân: <b id="nCount">0</b> hạt / đồng vị · <b id="fReact">0</b> phương trình mô phỏng. Hãy xem điều kiện phản ứng như một phần của phương trình, không chỉ là dòng ghi chú.<br>
   Chế độ hạt nhân là mô hình học tập về đồng vị, hạt bắn phá và bảo toàn số khối / điện tích; không phải hướng dẫn thí nghiệm.
 </footer>
 
@@ -2691,6 +2849,154 @@ const R = [
 ];
 
 /* =========================================================
+   KHO CHẤT MỞ RỘNG — các hợp chất mới đều bắt đầu ở trạng thái khóa.
+   Chúng chỉ được mở khóa khi được tạo ra bởi một phản ứng bên dưới.
+   ========================================================= */
+Object.assign(S, {
+  // Nitơ, nitrua và hợp chất vô cơ bổ sung
+  N2O3:{f:"N₂O₃",n:"Đinitơ trioxit",c:"oxide"},
+  Li3N:{f:"Li₃N",n:"Liti nitrua",c:"salt"},
+  Ca3N2:{f:"Ca₃N₂",n:"Canxi nitrua",c:"salt"},
+  Sr3N2:{f:"Sr₃N₂",n:"Stronti nitrua",c:"salt"},
+  K2S:{f:"K₂S",n:"Kali sunfua",c:"salt"},
+  SnS:{f:"SnS",n:"Thiếc(II) sunfua",c:"salt"},
+  HgS:{f:"HgS",n:"Thủy ngân(II) sunfua",c:"salt"},
+  Zn3P2:{f:"Zn₃P₂",n:"Kẽm photphua",c:"salt"},
+  Ca3P2:{f:"Ca₃P₂",n:"Canxi photphua",c:"salt"},
+  Mg3P2:{f:"Mg₃P₂",n:"Magie photphua",c:"salt"},
+  FeSi:{f:"FeSi",n:"Sắt silixua",c:"other"},
+  CaSi2:{f:"CaSi₂",n:"Canxi đisilixua",c:"other"},
+  TiSi2:{f:"TiSi₂",n:"Titan đisilixua",c:"other"},
+  BF3:{f:"BF₃",n:"Bo triflorua",c:"other"},
+  CF4:{f:"CF₄",n:"Cacbon tetraflorua",c:"other"},
+  SF6:{f:"SF₆",n:"Lưu huỳnh hexaflorua",c:"other"},
+  SiF4:{f:"SiF₄",n:"Silic tetraflorua",c:"other"},
+  ZnF2:{f:"ZnF₂",n:"Kẽm florua",c:"salt"},
+  NaF:{f:"NaF",n:"Natri florua",c:"salt"},
+  KF:{f:"KF",n:"Kali florua",c:"salt"},
+  CaF2:{f:"CaF₂",n:"Canxi florua",c:"salt"},
+  PF5:{f:"PF₅",n:"Photpho pentaflorua",c:"other"},
+  PBr3:{f:"PBr₃",n:"Photpho tribromua",c:"other"},
+  H2Se:{f:"H₂Se",n:"Hiđro selenua",c:"acid"},
+  H2Te:{f:"H₂Te",n:"Hiđro telurua",c:"acid"},
+  HBrO3:{f:"HBrO₃",n:"Axit bromic",c:"acid"},
+  HIO3:{f:"HIO₃",n:"Axit iodic",c:"acid"},
+  H2SeO4:{f:"H₂SeO₄",n:"Axit selenic",c:"acid"},
+  H3PO3:{f:"H₃PO₃",n:"Axit photphorơ",c:"acid"},
+  HMnO4:{f:"HMnO₄",n:"Axit pemanganic",c:"acid"},
+  Na3AlF6:{f:"Na₃AlF₆",n:"Natri hexafloroaluminat (criolit)",c:"salt"},
+  Na2WO4:{f:"Na₂WO₄",n:"Natri vonframat",c:"salt"},
+  K2WO4:{f:"K₂WO₄",n:"Kali vonframat",c:"salt"},
+  Na2MoO4:{f:"Na₂MoO₄",n:"Natri molypđat",c:"salt"},
+  K2MoO4:{f:"K₂MoO₄",n:"Kali molypđat",c:"salt"},
+  BaTiO3:{f:"BaTiO₃",n:"Bari titanat",c:"salt"},
+  PbCrO4:{f:"PbCrO₄",n:"Chì(II) cromat",c:"salt"},
+  B4C:{f:"B₄C",n:"Bo cacbua",c:"other"},
+  TiB2:{f:"TiB₂",n:"Titan điborua",c:"other"},
+  TiN:{f:"TiN",n:"Titan nitrua",c:"salt"},
+  ZrN:{f:"ZrN",n:"Zirconi nitrua",c:"salt"},
+  ZnSe:{f:"ZnSe",n:"Kẽm selenua",c:"salt"},
+  CdSe:{f:"CdSe",n:"Cadimi selenua",c:"salt"},
+  PbSe:{f:"PbSe",n:"Chì(II) selenua",c:"salt"},
+  Na2Se:{f:"Na₂Se",n:"Natri selenua",c:"salt"},
+  K2Se:{f:"K₂Se",n:"Kali selenua",c:"salt"},
+  MnO:{f:"MnO",n:"Mangan(II) oxit",c:"oxide"},
+  V2O3:{f:"V₂O₃",n:"Vanadi(III) oxit",c:"oxide"},
+  VO2:{f:"VO₂",n:"Vanadi(IV) oxit",c:"oxide"},
+  TiO:{f:"TiO",n:"Titan(II) oxit",c:"oxide"},
+  EthyleneOxide:{f:"C₂H₄O",n:"Etylen oxit (oxiran)",c:"organic"},
+  Toluene:{f:"C₆H₅CH₃",n:"Toluen",c:"organic"},
+  Ethylbenzene:{f:"C₆H₅C₂H₅",n:"Etylbenzen",c:"organic"},
+  Nitrobenzene:{f:"C₆H₅NO₂",n:"Nitrobenzen",c:"organic"},
+  Aniline:{f:"C₆H₅NH₂",n:"Anilin",c:"organic"},
+  Benzaldehyde:{f:"C₆H₅CHO",n:"Benzanđehit",c:"organic"},
+  BenzylAlcohol:{f:"C₆H₅CH₂OH",n:"Ancol benzylic",c:"organic"},
+  BenzoicAcid:{f:"C₆H₅COOH",n:"Axit benzoic",c:"organic"},
+  SodiumSalicylate:{f:"C₇H₅NaO₃",n:"Natri salicylat",c:"salt"},
+  SalicylicAcid:{f:"HO–C₆H₄–COOH",n:"Axit salicylic",c:"organic"},
+  Acetamide:{f:"CH₃CONH₂",n:"Axetamid",c:"organic"},
+  AceticAnhydride:{f:"(CH₃CO)₂O",n:"Anhiđrit axetic",c:"organic"},
+  Aspirin:{f:"C₉H₈O₄",n:"Axit axetylsalicylic (aspirin)",c:"organic"},
+  MethylBenzoate:{f:"C₆H₅COOCH₃",n:"Metyl benzoat",c:"organic"}
+});
+
+/* Các phản ứng bổ sung. Chúng tuân theo cùng engine và cơ chế mở khóa gốc. */
+R.push(
+  {r:["NO","NO2"],p:["N2O3"],cond:"nhiệt độ thấp / cân bằng",eq:"NO + NO₂ ⇌ N₂O₃"},
+  {r:["Li","N2"],p:["Li3N"],cond:"t°",eq:"6Li + N₂ → 2Li₃N"},
+  {r:["Ca","N2"],p:["Ca3N2"],cond:"t°",eq:"3Ca + N₂ → Ca₃N₂"},
+  {r:["Sr","N2"],p:["Sr3N2"],cond:"t°",eq:"3Sr + N₂ → Sr₃N₂"},
+  {r:["K","S"],p:["K2S"],cond:"t°",eq:"2K + S → K₂S"},
+  {r:["Sn","S"],p:["SnS"],cond:"t°",eq:"Sn + S → SnS"},
+  {r:["Hg","S"],p:["HgS"],cond:"mô phỏng phản ứng kết hợp",eq:"Hg + S → HgS"},
+  {r:["Zn","P"],p:["Zn3P2"],cond:"t°",eq:"3Zn + 2P → Zn₃P₂"},
+  {r:["Ca","P"],p:["Ca3P2"],cond:"t°",eq:"3Ca + 2P → Ca₃P₂"},
+  {r:["Mg","P"],p:["Mg3P2"],cond:"t°",eq:"3Mg + 2P → Mg₃P₂"},
+  {r:["Fe","Si"],p:["FeSi"],cond:"nhiệt độ cao",eq:"Fe + Si → FeSi"},
+  {r:["Ca","Si"],p:["CaSi2"],cond:"nhiệt độ cao",eq:"Ca + 2Si → CaSi₂"},
+  {r:["Ti","Si"],p:["TiSi2"],cond:"nhiệt độ cao",eq:"Ti + 2Si → TiSi₂"},
+  {r:["B","F2"],p:["BF3"],cond:"phương trình mô hình",eq:"2B + 3F₂ → 2BF₃"},
+  {r:["C","F2"],p:["CF4"],cond:"phương trình mô hình",eq:"C + 2F₂ → CF₄"},
+  {r:["S","F2"],p:["SF6"],cond:"phương trình mô hình",eq:"S + 3F₂ → SF₆"},
+  {r:["Si","F2"],p:["SiF4"],cond:"phương trình mô hình",eq:"Si + 2F₂ → SiF₄"},
+  {r:["Zn","F2"],p:["ZnF2"],cond:"t°",eq:"Zn + F₂ → ZnF₂"},
+  {r:["Na","F2"],p:["NaF"],cond:"phương trình kết hợp",eq:"2Na + F₂ → 2NaF"},
+  {r:["K","F2"],p:["KF"],cond:"phương trình kết hợp",eq:"2K + F₂ → 2KF"},
+  {r:["Ca","F2"],p:["CaF2"],cond:"phương trình kết hợp",eq:"Ca + F₂ → CaF₂"},
+  {r:["P","F2"],p:["PF5"],cond:"phương trình mô hình",eq:"2P + 5F₂ → 2PF₅"},
+  {r:["P","Br2"],p:["PBr3"],cond:"t°",eq:"2P + 3Br₂ → 2PBr₃"},
+  {r:["H2","Se"],p:["H2Se"],cond:"phương trình kết hợp mô hình",eq:"H₂ + Se → H₂Se"},
+  {r:["H2","Te"],p:["H2Te"],cond:"phương trình kết hợp mô hình",eq:"H₂ + Te → H₂Te"},
+  {r:["Br2","O3","H2O"],p:["HBrO3"],cond:"oxi hóa — mô hình khái niệm",eq:"3Br₂ + 5O₃ + 3H₂O → 6HBrO₃"},
+  {r:["I2","O3","H2O"],p:["HIO3"],cond:"oxi hóa — mô hình khái niệm",eq:"3I₂ + 5O₃ + 3H₂O → 6HIO₃"},
+  {r:["H2Se","O2"],p:["H2SeO4"],cond:"oxi hóa",eq:"H₂Se + 2O₂ → H₂SeO₄"},
+  {r:["P","O2","H2O"],p:["H3PO3"],cond:"oxi hóa có kiểm soát — mô hình",eq:"4P + 3O₂ + 6H₂O → 4H₃PO₃"},
+  {r:["MnO2","KOH","O2"],p:["K2MnO4","H2O"],cond:"oxi hóa trong môi trường kiềm — mô hình",eq:"2MnO₂ + 4KOH + O₂ → 2K₂MnO₄ + 2H₂O"},
+  {r:["KMnO4","H2SO4 loãng"],p:["HMnO4","KHSO4"],cond:"axit hóa — mô hình khái niệm",eq:"KMnO₄ + H₂SO₄ → HMnO₄ + KHSO₄"},
+  {r:["NaF","AlF3"],p:["Na3AlF6"],cond:"nhiệt độ cao",eq:"3NaF + AlF₃ → Na₃AlF₆"},
+  {r:["W","O2"],p:["WO3"],cond:"t°",eq:"2W + 3O₂ → 2WO₃"},
+  {r:["Mo","O2"],p:["MoO3"],cond:"t°",eq:"2Mo + 3O₂ → 2MoO₃"},
+  {r:["WO3","NaOH"],p:["Na2WO4","H2O"],cond:"nóng chảy",eq:"WO₃ + 2NaOH → Na₂WO₄ + H₂O"},
+  {r:["WO3","KOH"],p:["K2WO4","H2O"],cond:"nóng chảy",eq:"WO₃ + 2KOH → K₂WO₄ + H₂O"},
+  {r:["MoO3","NaOH"],p:["Na2MoO4","H2O"],cond:"nóng chảy",eq:"MoO₃ + 2NaOH → Na₂MoO₄ + H₂O"},
+  {r:["MoO3","KOH"],p:["K2MoO4","H2O"],cond:"nóng chảy",eq:"MoO₃ + 2KOH → K₂MoO₄ + H₂O"},
+  {r:["Ti","O2"],p:["TiO2"],cond:"t°",eq:"Ti + O₂ → TiO₂"},
+  {r:["BaO","TiO2"],p:["BaTiO3"],cond:"nung gốm — mô hình",eq:"BaO + TiO₂ → BaTiO₃"},
+  {r:["Cr2O3","KOH","O2"],p:["K2CrO4","H2O"],cond:"oxi hóa trong kiềm — mô hình",eq:"2Cr₂O₃ + 8KOH + 3O₂ → 4K₂CrO₄ + 4H₂O"},
+  {r:["Pb","O2"],p:["PbO"],cond:"t° — mô hình",eq:"2Pb + O₂ → 2PbO"},
+  {r:["PbO","HNO3"],p:["PbNO32","H2O"],cond:"axit hóa",eq:"PbO + 2HNO₃ → Pb(NO₃)₂ + H₂O"},
+  {r:["PbNO32","K2CrO4"],p:["PbCrO4","KNO3"],cond:"trao đổi trong dung dịch",eq:"Pb(NO₃)₂ + K₂CrO₄ → PbCrO₄↓ + 2KNO₃"},
+  {r:["B","C"],p:["B4C"],cond:"nhiệt độ cao",eq:"4B + C → B₄C"},
+  {r:["Ti","B"],p:["TiB2"],cond:"nhiệt độ cao",eq:"Ti + 2B → TiB₂"},
+  {r:["Ti","N2"],p:["TiN"],cond:"nhiệt độ cao",eq:"2Ti + N₂ → 2TiN"},
+  {r:["Zr","N2"],p:["ZrN"],cond:"nhiệt độ cao",eq:"2Zr + N₂ → 2ZrN"},
+  {r:["Zn","Se"],p:["ZnSe"],cond:"phương trình kết hợp mô hình",eq:"Zn + Se → ZnSe"},
+  {r:["Cd","Se"],p:["CdSe"],cond:"phương trình kết hợp mô hình",eq:"Cd + Se → CdSe"},
+  {r:["Pb","Se"],p:["PbSe"],cond:"phương trình kết hợp mô hình",eq:"Pb + Se → PbSe"},
+  {r:["Na","Se"],p:["Na2Se"],cond:"phương trình kết hợp mô hình",eq:"2Na + Se → Na₂Se"},
+  {r:["K","Se"],p:["K2Se"],cond:"phương trình kết hợp mô hình",eq:"2K + Se → K₂Se"},
+  {r:["MnO2","H2"],p:["MnO","H2O"],cond:"khử một phần — mô hình tổng quát",eq:"MnO₂ + H₂ → MnO + H₂O"},
+  {r:["V","O2"],p:["V2O3"],cond:"oxi hóa hạn chế — mô hình",eq:"4V + 3O₂ → 2V₂O₃"},
+  {r:["V2O3","O2"],p:["VO2"],cond:"oxi hóa tiếp",eq:"2V₂O₃ + O₂ → 4VO₂"},
+  {r:["TiO2","Ti"],p:["TiO"],cond:"khử oxit — mô hình",eq:"TiO₂ + Ti → 2TiO"},
+  {r:["C2H4","H2O2"],p:["EthyleneOxide","H2O"],cond:"oxi hóa — mô hình hữu cơ",eq:"C₂H₄ + H₂O₂ → C₂H₄O + H₂O"},
+  {r:["C6H6","CH3Cl"],p:["Toluene","HCl"],cond:"ankyl hóa thơm — mô hình, xúc tác",eq:"C₆H₆ + CH₃Cl → C₆H₅CH₃ + HCl"},
+  {r:["C6H6","C2H4"],p:["Ethylbenzene"],cond:"ankyl hóa thơm — mô hình, xúc tác",eq:"C₆H₆ + C₂H₄ → C₆H₅C₂H₅"},
+  {r:["C6H6","HNO3"],p:["Nitrobenzene","H2O"],cond:"nitro hóa — mô hình, xúc tác axit",eq:"C₆H₆ + HNO₃ → C₆H₅NO₂ + H₂O"},
+  {r:["Nitrobenzene","H2"],p:["Aniline","H2O"],cond:"khử — mô hình, xúc tác",eq:"C₆H₅NO₂ + 3H₂ → C₆H₅NH₂ + 2H₂O"},
+  {r:["C6H6","CO"],p:["Benzaldehyde"],cond:"formyl hóa thơm — mô hình, xúc tác HCl/CuCl",eq:"C₆H₆ + CO → C₆H₅CHO"},
+  {r:["Benzaldehyde","H2"],p:["BenzylAlcohol"],cond:"hiđro hóa — mô hình",eq:"C₆H₅CHO + H₂ → C₆H₅CH₂OH"},
+  {r:["Benzaldehyde","O2"],p:["BenzoicAcid"],cond:"oxi hóa",eq:"2C₆H₅CHO + O₂ → 2C₆H₅COOH"},
+  {r:["Phenol","CO2","NaOH"],p:["SodiumSalicylate","H2O"],cond:"Kolbe–Schmitt — mô hình khái niệm",eq:"C₆H₅OH + CO₂ + NaOH → C₇H₅NaO₃ + H₂O"},
+  {r:["SodiumSalicylate","HCl"],p:["SalicylicAcid","NaCl"],cond:"axit hóa",eq:"C₇H₅NaO₃ + HCl → C₇H₆O₃ + NaCl"},
+  {r:["CH3COOH","NH3"],p:["Acetamide","H2O"],cond:"tách nước — mô hình hữu cơ",eq:"CH₃COOH + NH₃ → CH₃CONH₂ + H₂O"},
+  {r:["CH3COOH"],p:["AceticAnhydride","H2O"],cond:"tách nước — mô hình khái niệm",eq:"2CH₃COOH → (CH₃CO)₂O + H₂O"},
+  {r:["SalicylicAcid","AceticAnhydride"],p:["Aspirin","CH3COOH"],cond:"axetyl hóa — mô hình hữu cơ",eq:"C₇H₆O₃ + (CH₃CO)₂O → C₉H₈O₄ + CH₃COOH"},
+  {r:["BenzoicAcid","CH3OH"],p:["MethylBenzoate","H2O"],cond:"este hóa — mô hình hữu cơ",eq:"C₆H₅COOH + CH₃OH ⇌ C₆H₅COOCH₃ + H₂O"},
+  {r:["C6H5Cl","NaOH"],p:["Phenol","NaCl"],cond:"thế nucleophile — mô hình học tập",eq:"C₆H₅Cl + NaOH → C₆H₅OH + NaCl"}
+);
+
+/* =========================================================
    PHẢN ỨNG HẠT NHÂN — mô phỏng giáo dục
    r = chất/hạt đầu vào; p = sản phẩm. ID lặp lại là số lượng hạt.
    ========================================================= */
@@ -2805,7 +3111,7 @@ const SUBSCRIPT = {"0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","
 function toSuperscript(value){ return String(value).split("").map(ch=>SUPERSCRIPT[ch] || ch).join(""); }
 function toSubscript(value){ return String(value).split("").map(ch=>SUBSCRIPT[ch] || ch).join(""); }
 for (const [id, symbol, mass, atomicNumber, name] of ISOTOPE_CATALOG) {
-  const isomer = id.includes("m");
+  const isomer = /\d+m(?:n)?$/.test(id);
   const massLabel = toSuperscript(mass) + (isomer ? "ᵐ" : "");
   const formula = massLabel + toSubscript(atomicNumber) + symbol;
   if (!S[id]) S[id] = {f: formula, n: name, c: "nuclear", kind: "isotope"};
@@ -2815,6 +3121,438 @@ if (!S.nu) S.nu = {f:"⁰₀νₑ",n:"Nơtrinô electron",c:"nuclear",kind:"part
 for (const rx of NX) {
   if (rx.cond === "bắt nơtron (nhánh gamma minh họa)") {
     rx.eq = `${S[rx.r[0]]?.f || rx.r[0]} + ${S.neutron.f} → ${S[rx.p[0]]?.f || rx.p[0]} + ${S.gamma.f}`;
+  }
+}
+
+/* =====================================================================
+   KOI DATA WORKSHOP — KHO MỞ RỘNG & VÙNG CHỈNH SỬA
+   ---------------------------------------------------------------------
+   Mục tiêu kho hóa học: 1.800 chất (chưa tính hạt nhân).
+   Đơn chất (c: "element") được mở đầu game; hợp chất luôn bị khóa.
+
+   Thêm chất thủ công:
+     MANUAL_SUBSTANCES: { MaChat: { f:"NaCl", n:"Natri clorua", c:"salt" } }
+   c hợp lệ thường dùng: element, oxide, base, acid, salt, organic, polymer, other.
+
+   Thêm phản ứng:
+     MANUAL_CHEMISTRY_REACTIONS: [{ r:["H2","O2"], p:["H2O"],
+       cond:"đốt cháy", eq:"2H₂ + O₂ → 2H₂O" }]
+     MANUAL_NUCLEAR_REACTIONS: cùng cấu trúc, dùng ID hạt/đồng vị.
+
+   Bỏ chất có sẵn: thêm ID vào REMOVED_SUBSTANCE_IDS. Các phản ứng liên
+   quan đến ID bị bỏ sẽ tự loại để tránh tạo ra sản phẩm không còn tồn tại.
+   ===================================================================== */
+const KOI_TARGET_CHEMICALS = 1800;
+const KOI_SUBSCRIPT_MAP = {"0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","6":"₆","7":"₇","8":"₈","9":"₉"};
+const KOI_ASCII_SUBSCRIPT_MAP = {"₀":"0","₁":"1","₂":"2","₃":"3","₄":"4","₅":"5","₆":"6","₇":"7","₈":"8","₉":"9"};
+function koiSubscriptFormula(formula) {
+  return String(formula).replace(/\d/g, digit => KOI_SUBSCRIPT_MAP[digit] || digit);
+}
+function koiFormulaKey(formula) {
+  return String(formula || "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/[₀-₉]/g, digit => KOI_ASCII_SUBSCRIPT_MAP[digit] || digit)
+    .replace(/[\s·•↑↓]/g, "")
+    .toUpperCase();
+}
+function koiChemicalCount() {
+  return Object.keys(S).filter(id => S[id] && S[id].c !== "nuclear").length;
+}
+function koiGcd(a, b) {
+  while (b) [a, b] = [b, a % b];
+  return Math.abs(a) || 1;
+}
+function koiGroupedIon(formula, coefficient, polyatomic) {
+  if (coefficient === 1) return formula;
+  return (polyatomic ? `(${formula})` : formula) + coefficient;
+}
+function koiAddChemical(id, formula, name, category, extra = {}) {
+  if (S[id]) return false;
+  S[id] = { f: koiSubscriptFormula(formula), n: name, c: category, ...extra };
+  return true;
+}
+
+/* Dữ liệu ion được mô tả ngắn gọn để sinh muối trung hòa điện tích.
+   Bạn có thể bổ sung ion ở đây; công thức muối sẽ được tạo tự động. */
+const KOI_CATIONS = [
+  {key:"Li",s:"Li",q:1,n:"Liti",baseId:"LiOH",base:"LiOH"},
+  {key:"Na",s:"Na",q:1,n:"Natri",baseId:"NaOH",base:"NaOH"},
+  {key:"K",s:"K",q:1,n:"Kali",baseId:"KOH",base:"KOH"},
+  {key:"Rb",s:"Rb",q:1,n:"Rubidi",base:"RbOH",base:"RbOH"},
+  {key:"Cs",s:"Cs",q:1,n:"Xesi",baseId:"CsOH",base:"CsOH"},
+  {key:"Ag",s:"Ag",q:1,n:"Bạc",baseId:"AgOH",base:"AgOH"},
+  {key:"NH4",s:"NH4",q:1,n:"Amoni",poly:true,baseId:"NH3H2O",base:"NH4OH"},
+  {key:"Mg",s:"Mg",q:2,n:"Magie",baseId:"MgOH2",base:"Mg(OH)2"},
+  {key:"Ca",s:"Ca",q:2,n:"Canxi",baseId:"CaOH2",base:"Ca(OH)2"},
+  {key:"Sr",s:"Sr",q:2,n:"Stronti",baseId:"SrOH2",base:"Sr(OH)2"},
+  {key:"Ba",s:"Ba",q:2,n:"Bari",baseId:"BaOH2",base:"Ba(OH)2"},
+  {key:"Zn",s:"Zn",q:2,n:"Kẽm",baseId:"ZnOH2",base:"Zn(OH)2"},
+  {key:"Cd",s:"Cd",q:2,n:"Cadimi",baseId:"CdOH2",base:"Cd(OH)2"},
+  {key:"FeII",s:"Fe",q:2,n:"Sắt(II)",baseId:"FeOH2",base:"Fe(OH)2"},
+  {key:"FeIII",s:"Fe",q:3,n:"Sắt(III)",baseId:"FeOH3",base:"Fe(OH)3"},
+  {key:"CuI",s:"Cu",q:1,n:"Đồng(I)",baseId:"CuOH",base:"CuOH"},
+  {key:"CuII",s:"Cu",q:2,n:"Đồng(II)",baseId:"CuOH2",base:"Cu(OH)2"},
+  {key:"NiII",s:"Ni",q:2,n:"Niken(II)",baseId:"NiOH2",base:"Ni(OH)2"},
+  {key:"CoII",s:"Co",q:2,n:"Coban(II)",baseId:"CoOH2",base:"Co(OH)2"},
+  {key:"CoIII",s:"Co",q:3,n:"Coban(III)",baseId:"CoOH3",base:"Co(OH)3"},
+  {key:"MnII",s:"Mn",q:2,n:"Mangan(II)",baseId:"MnOH2",base:"Mn(OH)2"},
+  {key:"CrIII",s:"Cr",q:3,n:"Crôm(III)",baseId:"CrOH3",base:"Cr(OH)3"},
+  {key:"Al",s:"Al",q:3,n:"Nhôm",baseId:"AlOH3",base:"Al(OH)3"},
+  {key:"Ga",s:"Ga",q:3,n:"Gali",baseId:"GaOH3",base:"Ga(OH)3"},
+  {key:"In",s:"In",q:3,n:"Indi",baseId:"InOH3",base:"In(OH)3"},
+  {key:"SnII",s:"Sn",q:2,n:"Thiếc(II)",baseId:"SnOH2",base:"Sn(OH)2"},
+  {key:"SnIV",s:"Sn",q:4,n:"Thiếc(IV)",baseId:"SnOH4",base:"Sn(OH)4"},
+  {key:"PbII",s:"Pb",q:2,n:"Chì(II)",baseId:"PbOH2",base:"Pb(OH)2"},
+  {key:"PbIV",s:"Pb",q:4,n:"Chì(IV)",baseId:"PbOH4",base:"Pb(OH)4"},
+  {key:"TiIV",s:"Ti",q:4,n:"Titan(IV)",baseId:"TiOH4",base:"Ti(OH)4"}
+];
+const KOI_ANIONS = [
+  {key:"F",f:"F",q:1,n:"florua"}, {key:"Cl",f:"Cl",q:1,n:"clorua"},
+  {key:"Br",f:"Br",q:1,n:"bromua"}, {key:"I",f:"I",q:1,n:"iodua"},
+  {key:"NO3",f:"NO3",q:1,n:"nitrat",acidId:"HNO3",acidF:"HNO3",acidQ:1},
+  {key:"NO2",f:"NO2",q:1,n:"nitrit",acidId:"HNO2",acidF:"HNO2",acidQ:1},
+  {key:"ClO3",f:"ClO3",q:1,n:"clorat",acidId:"HClO3",acidF:"HClO3",acidQ:1},
+  {key:"ClO4",f:"ClO4",q:1,n:"peclorat",acidId:"HClO4",acidF:"HClO4",acidQ:1},
+  {key:"MnO4",f:"MnO4",q:1,n:"pemanganat",acidId:"HMnO4",acidF:"HMnO4",acidQ:1},
+  {key:"IO3",f:"IO3",q:1,n:"iodat",acidId:"HIO3",acidF:"HIO3",acidQ:1},
+  {key:"SO4",f:"SO4",q:2,n:"sunfat",acidId:"H2SO4 loãng",acidF:"H2SO4",acidQ:2},
+  {key:"SO3",f:"SO3",q:2,n:"sunfit",acidId:"H2SO3",acidF:"H2SO3",acidQ:2},
+  {key:"CO3",f:"CO3",q:2,n:"cacbonat",acidId:"H2CO3",acidF:"H2CO3",acidQ:2},
+  {key:"C2O4",f:"C2O4",q:2,n:"oxalat",acidId:"H2C2O4",acidF:"H2C2O4",acidQ:2},
+  {key:"CrO4",f:"CrO4",q:2,n:"cromat",acidId:"H2CrO4",acidF:"H2CrO4",acidQ:2},
+  {key:"SiO3",f:"SiO3",q:2,n:"silicat",acidId:"H2SiO3",acidF:"H2SiO3",acidQ:2},
+  {key:"S2O3",f:"S2O3",q:2,n:"thiosunfat"},
+  {key:"HPO4",f:"HPO4",q:2,n:"hiđrophotphat",acidId:"H3PO4",acidF:"H3PO4",acidQ:3},
+  {key:"HCO3",f:"HCO3",q:1,n:"hiđrocacbonat",acidId:"H2CO3",acidF:"H2CO3",acidQ:2},
+  {key:"CH3COO",f:"C2H3O2",q:1,n:"axetat",acidId:"CH3COOH",acidF:"CH3COOH",acidQ:1},
+  {key:"HCOO",f:"CHO2",q:1,n:"fomat",acidId:"HCOOH",acidF:"HCOOH",acidQ:1},
+  {key:"PO4",f:"PO4",q:3,n:"photphat",acidId:"H3PO4",acidF:"H3PO4",acidQ:3},
+  {key:"BO3",f:"BO3",q:3,n:"borat",acidId:"H3BO3",acidF:"H3BO3",acidQ:3},
+  {key:"Cr2O7",f:"Cr2O7",q:2,n:"đicromat",acidId:"H2Cr2O7",acidF:"H2Cr2O7",acidQ:2},
+  {key:"SCN",f:"SCN",q:1,n:"thiocyanat"}
+];
+
+/* Bổ sung vài axit thuộc các họ chất dùng trong kho muối. */
+const KOI_ACID_ADDITIONS = [
+  ["H2SiO3","H2SiO3","Axit silixic"],
+  ["H2Cr2O7","H2Cr2O7","Axit đicromic"],
+  ["HIO3","HIO3","Axit iotic"]
+];
+for (const [id, formula, name] of KOI_ACID_ADDITIONS) {
+  if (!S[id]) koiAddChemical(id, formula, name, "acid");
+}
+
+const KOI_FORMULA_TO_ID = new Map();
+const KOI_KNOWN_FORMULAS = new Set();
+for (const [id, sub] of Object.entries(S)) {
+  if (!sub || sub.c === "nuclear") continue;
+  const key = koiFormulaKey(sub.f);
+  if (key) {
+    KOI_KNOWN_FORMULAS.add(key);
+    if (!KOI_FORMULA_TO_ID.has(key)) KOI_FORMULA_TO_ID.set(key, id);
+  }
+}
+function koiFormulaForSalt(cation, anion) {
+  const gcd = koiGcd(cation.q, anion.q);
+  const cations = anion.q / gcd;
+  const anions = cation.q / gcd;
+  return koiGroupedIon(cation.s, cations, !!cation.poly) + koiGroupedIon(anion.f, anions, !/^[A-Z][a-z]?$/.test(anion.f));
+}
+function koiBaseForCation(cation) {
+  if (cation.baseId && S[cation.baseId]) return cation.baseId;
+  const formulaKey = koiFormulaKey(cation.base);
+  if (KOI_FORMULA_TO_ID.has(formulaKey)) return KOI_FORMULA_TO_ID.get(formulaKey);
+  const id = `gen_base_${cation.key}`;
+  if (koiAddChemical(id, cation.base, `${cation.n} hiđroxit`, "base", { generatedBy:"KOI salt library" })) {
+    KOI_KNOWN_FORMULAS.add(formulaKey);
+    KOI_FORMULA_TO_ID.set(formulaKey, id);
+    return id;
+  }
+  return S[id] ? id : null;
+}
+function koiResolveAcid(anion) {
+  if (!anion.acidId) return null;
+  if (S[anion.acidId]) return anion.acidId;
+  const key = koiFormulaKey(anion.acidF);
+  if (KOI_FORMULA_TO_ID.has(key)) return KOI_FORMULA_TO_ID.get(key);
+  const names = {
+    HNO2:"Axit nitrơ", HClO3:"Axit cloric", HClO4:"Axit pecloric", HMnO4:"Axit pemanganic",
+    H2CrO4:"Axit cromic", H2C2O4:"Axit oxalic", H2SiO3:"Axit silixic", H3BO3:"Axit boric",
+    H2Cr2O7:"Axit đicromic", HIO3:"Axit iotic", HCOOH:"Axit fomic", H2CO3:"Axit cacbonic"
+  };
+  if (koiAddChemical(anion.acidId, anion.acidF, names[anion.acidF] || `Axit tạo ion ${anion.key}`, "acid")) {
+    KOI_KNOWN_FORMULAS.add(key);
+    KOI_FORMULA_TO_ID.set(key, anion.acidId);
+  }
+  return S[anion.acidId] ? anion.acidId : (KOI_FORMULA_TO_ID.get(key) || null);
+}
+
+/* Tạo các muối cân bằng điện tích, bỏ qua công thức đã có sẵn.
+   Giới hạn số muối bổ sung để kho vẫn có nhiều chất hữu cơ. */
+const KOI_GENERATED_SALT_ROUTES = [];
+let koiGeneratedSaltCount = 0;
+const KOI_SALT_LIMIT = 520;
+const koiSaltPairs = [];
+for (let diagonal = 0; diagonal < KOI_CATIONS.length + KOI_ANIONS.length - 1; diagonal++) {
+  for (let ci = 0; ci < KOI_CATIONS.length; ci++) {
+    const ai = diagonal - ci;
+    if (ai >= 0 && ai < KOI_ANIONS.length) koiSaltPairs.push([KOI_CATIONS[ci], KOI_ANIONS[ai]]);
+  }
+}
+for (const [cation, anion] of koiSaltPairs) {
+  if (koiGeneratedSaltCount >= KOI_SALT_LIMIT || koiChemicalCount() >= KOI_TARGET_CHEMICALS) break;
+  const formula = koiFormulaForSalt(cation, anion);
+  const formulaKey = koiFormulaKey(formula);
+  if (KOI_KNOWN_FORMULAS.has(formulaKey)) continue;
+  const id = `gen_salt_${cation.key}_${anion.key}`;
+  if (!koiAddChemical(id, formula, `${cation.n} ${anion.n}`, "salt", { generatedBy:"KOI balanced-ion library" })) continue;
+  KOI_KNOWN_FORMULAS.add(formulaKey);
+  KOI_FORMULA_TO_ID.set(formulaKey, id);
+  koiGeneratedSaltCount++;
+  const acidId = koiResolveAcid(anion);
+  const baseId = koiBaseForCation(cation);
+  if (acidId && baseId && S.H2O) {
+    const gcd = koiGcd(cation.q, anion.q);
+    KOI_GENERATED_SALT_ROUTES.push({
+      r:[baseId, acidId], p:[id,"H2O"], cond:"trung hòa axit–bazơ (mô phỏng)",
+      eq:`${(anion.q/gcd===1?"":anion.q/gcd)+koiSubscriptFormula(S[baseId].f.replace(/<[^>]*>/g,""))} + ${(cation.q/gcd===1?"":cation.q/gcd)+koiSubscriptFormula(anion.acidF || "")} → ${koiSubscriptFormula(formula)} + ${(cation.q*anion.q/gcd===1?"":cation.q*anion.q/gcd)+"H₂O"}`,
+      note:"Phương trình tổng quát sinh từ điện tích ion; hãy kiểm tra điều kiện và độ tan của chất cụ thể."
+    });
+  }
+}
+
+/* Tên gốc dùng để sinh dãy đồng đẳng hữu cơ; các đồng phân có ID riêng. */
+const KOI_ROOTS = ["","met","et","prop","but","pent","hex","hept","oct","non","dec","undec","dodec","tridec","tetradec","pentadec","hexadec","heptadec","octadec","nonadec","icos","henicos","docos","tricos","tetracos","pentacos","hexacos","heptacos","octacos","nonacos","triacont","hentriacont","dotriacont","tritriacont","tetratriacont","pentatriacont","hexatriacont","heptatriacont","octatriacont","nonatriacont","tetracont","hentetracont","dotetracont","tritetracont","tetratetracont","pentatetracont","hexatetracont","heptatetracont","octatetracont","nonatetracont","pentacont"];
+function koiRoot(n) { return KOI_ROOTS[n] || `C${n}`; }
+function koiMolecularFormula(parts) {
+  return Object.entries(parts).filter(([,count]) => count > 0).map(([element,count]) => element + (count === 1 ? "" : count)).join("");
+}
+const KOI_ORGANIC_FAMILIES = [];
+function koiAddOrganicFamily(familyName, items) { KOI_ORGANIC_FAMILIES.push({familyName, items}); }
+
+const koiAlkanes = [];
+for (let n = 1; n <= 50; n++) {
+  if ([1,2,4,5].includes(n)) continue; // các chất đơn giản này đã có trong kho gốc
+  koiAlkanes.push({id:`gen_alkane_${n}`, f:koiMolecularFormula({C:n,H:2*n+2}), n:`n-${koiRoot(n)}an · mạch thẳng`, c:"organic"});
+}
+koiAddOrganicFamily("ankan", koiAlkanes);
+
+const koiAlkenes = [];
+for (let n = 4; n <= 50; n++) {
+  if (n === 4) continue; // buten và các đồng phân thường gặp đã có trong kho gốc
+  for (let pos = 1; pos <= Math.floor(n/2); pos++) {
+    const formula = koiMolecularFormula({C:n,H:2*n});
+    koiAlkenes.push({id:`gen_alkene_${n}_p${pos}`,f:formula,n:`${koiRoot(n)}-${pos}-en`,c:"organic"});
+    if (pos > 1 && n > 4) {
+      koiAlkenes.push({id:`gen_alkene_${n}_p${pos}_E`,f:formula,n:`(E)-${koiRoot(n)}-${pos}-en`,c:"organic"});
+      koiAlkenes.push({id:`gen_alkene_${n}_p${pos}_Z`,f:formula,n:`(Z)-${koiRoot(n)}-${pos}-en`,c:"organic"});
+    }
+  }
+}
+koiAddOrganicFamily("anken", koiAlkenes);
+
+const koiAlkynes = [];
+for (let n = 3; n <= 50; n++) {
+  for (let pos = 1; pos <= Math.floor((n-1)/2); pos++) {
+    koiAlkynes.push({id:`gen_alkyne_${n}_p${pos}`,f:koiMolecularFormula({C:n,H:2*n-2}),n:`${koiRoot(n)}-${pos}-in`,c:"organic"});
+  }
+}
+koiAddOrganicFamily("ankin", koiAlkynes);
+
+const koiAlcohols = [];
+for (let n = 5; n <= 50; n++) {
+  for (let pos = 1; pos <= Math.floor(n/2); pos++) {
+    koiAlcohols.push({id:`gen_alcohol_${n}_p${pos}`,f:koiMolecularFormula({C:n,H:2*n+2,O:1}),n:`${koiRoot(n)}an-${pos}-ol`,c:"organic"});
+  }
+}
+koiAddOrganicFamily("ancol", koiAlcohols);
+
+const koiAldehydes = [];
+for (let n = 5; n <= 50; n++) koiAldehydes.push({id:`gen_aldehyde_${n}`,f:koiMolecularFormula({C:n,H:2*n,O:1}),n:`${koiRoot(n)}anal`,c:"organic"});
+koiAddOrganicFamily("andehit", koiAldehydes);
+
+const koiKetones = [];
+for (let n = 5; n <= 50; n++) {
+  for (let pos = 2; pos <= Math.floor(n/2); pos++) koiKetones.push({id:`gen_ketone_${n}_p${pos}`,f:koiMolecularFormula({C:n,H:2*n,O:1}),n:`${koiRoot(n)}an-${pos}-on`,c:"organic"});
+}
+koiAddOrganicFamily("xeton", koiKetones);
+
+const koiCarboxylicAcids = [];
+for (let n = 4; n <= 50; n++) koiCarboxylicAcids.push({id:`gen_acid_${n}`,f:koiMolecularFormula({C:n,H:2*n,O:2}),n:`Axit ${koiRoot(n)}anoic`,c:"organic"});
+koiAddOrganicFamily("axit cacboxylic", koiCarboxylicAcids);
+
+const koiAmines = [];
+for (let n = 3; n <= 40; n++) {
+  for (let pos = 1; pos <= Math.floor((n+1)/2); pos++) koiAmines.push({id:`gen_amine_${n}_p${pos}`,f:koiMolecularFormula({C:n,H:2*n+3,N:1}),n:`${koiRoot(n)}an-${pos}-amin`,c:"organic"});
+}
+koiAddOrganicFamily("amin", koiAmines);
+
+const koiHalides = [];
+for (const [symbol, viName] of [["F","flo"],["Cl","clo"],["Br","bromo"],["I","iodo"]]) {
+  for (let n = 1; n <= 35; n++) {
+    for (let pos = 1; pos <= Math.floor((n+1)/2); pos++) {
+      koiHalides.push({id:`gen_${viName}_${n}_p${pos}`,f:koiMolecularFormula({C:n,H:2*n+1,[symbol]:1}),n:`${pos}-${viName}${koiRoot(n)}an`,c:"organic"});
+    }
+  }
+}
+koiAddOrganicFamily("dẫn xuất halogen", koiHalides);
+
+const koiEthers = [];
+for (let total = 4; total <= 30; total++) {
+  for (let a = 1; a <= Math.floor(total/2); a++) {
+    const b = total - a;
+    const alkyl = x => ({1:"metyl",2:"etyl",3:"propyl",4:"butyl"}[x] || `${koiRoot(x)}yl`);
+    koiEthers.push({id:`gen_ether_${a}_${b}`,f:koiMolecularFormula({C:total,H:2*total+2,O:1}),n:`${alkyl(a)} ${alkyl(b)} ete`,c:"organic"});
+  }
+}
+koiAddOrganicFamily("ete", koiEthers);
+
+const koiEsters = [];
+for (let total = 3; total <= 35; total++) {
+  for (let acidC = 1; acidC < total; acidC++) {
+    const alcoholC = total - acidC;
+    if ((acidC === 1 && alcoholC === 2) || (acidC === 2 && alcoholC === 2)) continue; // ethyl formate and ethyl acetate đã có
+    const alcoholName = ({1:"metyl",2:"etyl",3:"propyl",4:"butyl"}[alcoholC] || `${koiRoot(alcoholC)}yl`);
+    const acidName = `${koiRoot(acidC)}anoat`;
+    koiEsters.push({id:`gen_ester_a${acidC}_o${alcoholC}`,f:koiMolecularFormula({C:total,H:2*total,O:2}),n:`${alcoholName} ${acidName}`,c:"organic"});
+  }
+}
+koiAddOrganicFamily("este", koiEsters);
+
+const koiNitriles = [];
+for (let n = 3; n <= 35; n++) koiNitriles.push({id:`gen_nitrile_${n}`,f:koiMolecularFormula({C:n,H:2*n-1,N:1}),n:`${koiRoot(n)}anonitril`,c:"organic"});
+koiAddOrganicFamily("nitril", koiNitriles);
+
+const koiAmides = [];
+for (let n = 1; n <= 35; n++) koiAmides.push({id:`gen_amide_${n}`,f:koiMolecularFormula({C:n,H:2*n+1,N:1,O:1}),n:`${koiRoot(n)}anamit`,c:"organic"});
+koiAddOrganicFamily("amit", koiAmides);
+
+/* Chọn xen kẽ giữa các họ để kho đạt đủ 1.800 chất mà không nghiêng hẳn
+   về một loại. Công thức lặp giữa đồng phân là bình thường trong hóa hữu cơ. */
+let koiOrganicCursor = 0;
+while (koiChemicalCount() < KOI_TARGET_CHEMICALS) {
+  let addedThisRound = false;
+  for (const family of KOI_ORGANIC_FAMILIES) {
+    const item = family.items[koiOrganicCursor];
+    if (!item) continue;
+    if (koiChemicalCount() >= KOI_TARGET_CHEMICALS) break;
+    if (!S[item.id]) {
+      koiAddChemical(item.id, item.f, item.n, item.c, {generatedBy:family.familyName});
+      addedThisRound = true;
+    }
+  }
+  if (!addedThisRound && koiOrganicCursor > Math.max(...KOI_ORGANIC_FAMILIES.map(f => f.items.length))) break;
+  koiOrganicCursor++;
+}
+if (koiChemicalCount() < KOI_TARGET_CHEMICALS) {
+  console.warn(`KOI LAB: kho hóa học mới có ${koiChemicalCount()} / ${KOI_TARGET_CHEMICALS} chất; hãy bổ sung thêm họ chất trong KOI_ORGANIC_FAMILIES.`);
+}
+
+/* Tạo đường phản ứng trung hòa cho những muối được sinh từ cặp ion.
+   R vẫn giữ nguyên toàn bộ phản ứng gốc; phần này chỉ bổ sung đường mới. */
+const koiExistingReactionKeys = new Set(R.map(rx => `${[...(rx.r||[])].sort().join("+")}=>${[...(rx.p||[])].sort().join("+")}`));
+for (const rx of KOI_GENERATED_SALT_ROUTES) {
+  if (koiChemicalCount() < KOI_TARGET_CHEMICALS) break;
+  const key = `${[...rx.r].sort().join("+")}=>${[...rx.p].sort().join("+")}`;
+  if (koiExistingReactionKeys.has(key)) continue;
+  R.push(rx);
+  koiExistingReactionKeys.add(key);
+}
+
+/* Thêm đồng vị và hạt nhân thường gặp; tất cả vẫn khóa lúc đầu trừ khi
+   được nêu trong nuclearUnlocked ở phần ENGINE. */
+const KOI_NUCLEAR_ISOTOPES = [
+  ["O19n","O",19,8,"Oxi-19"],["F18n","F",18,9,"Flo-18"],["Ne22n","Ne",22,10,"Neon-22"],
+  ["Mg27n","Mg",27,12,"Magie-27"],["Al26n","Al",26,13,"Nhôm-26"],["Si31n","Si",31,14,"Silic-31"],
+  ["P33n","P",33,15,"Photpho-33"],["S35n","S",35,16,"Lưu huỳnh-35"],["S36n","S",36,16,"Lưu huỳnh-36"],
+  ["Ar39n","Ar",39,18,"Argon-39"],["K42n","K",42,19,"Kali-42"],["Ca42n","Ca",42,20,"Canxi-42"],
+  ["Ca43n","Ca",43,20,"Canxi-43"],["Ca48n","Ca",48,20,"Canxi-48"],["Cr48n","Cr",48,24,"Crôm-48"],
+  ["Fe54n","Fe",54,26,"Sắt-54"],["Ni62n","Ni",62,28,"Niken-62"],["Cu65n","Cu",65,29,"Đồng-65"],
+  ["Zn66n","Zn",66,30,"Kẽm-66"],["Zn68n","Zn",68,30,"Kẽm-68"],["Br79n","Br",79,35,"Brom-79"],
+  ["Br81n","Br",81,35,"Brom-81"],["Kr85n","Kr",85,36,"Krypton-85"],["Sr88n","Sr",88,38,"Stronti-88"],
+  ["Sr90n","Sr",90,38,"Stronti-90"],["Y89n","Y",89,39,"Ytri-89"],["Y90n","Y",90,39,"Ytri-90"],
+  ["Zr90n","Zr",90,40,"Zirconi-90"],["Mo99n","Mo",99,42,"Molypden-99"],["Ru103n","Ru",103,44,"Rutheni-103"],
+  ["I129n","I",129,53,"Iot-129"],["Xe133n","Xe",133,54,"Xenon-133"],["Xe135n","Xe",135,54,"Xenon-135"],
+  ["Cs137n","Cs",137,55,"Xesi-137"],["Ba140n","Ba",140,56,"Bari-140"],["La139n","La",139,57,"Lantan-139"],
+  ["Ce140n","Ce",140,58,"Xeri-140"],["Nd144n","Nd",144,60,"Neodim-144"],["Eu152n","Eu",152,63,"Europi-152"],
+  ["Gd157n","Gd",157,64,"Gadolini-157"],["W184n","W",184,74,"Wolfram-184"],["Au197n","Au",197,79,"Vàng-197"],
+  ["Hg202n","Hg",202,80,"Thủy ngân-202"],["Pb208n","Pb",208,82,"Chì-208"],["Bi209n","Bi",209,83,"Bitmut-209"],
+  ["Po218n","Po",218,84,"Poloni-218"],["Ra224n","Ra",224,88,"Radi-224"],["Ac227n","Ac",227,89,"Actini-227"],
+  ["U234n","U",234,92,"Urani-234"],["U236n","U",236,92,"Urani-236"],["Th230n","Th",230,90,"Thori-230"],
+  ["Th231n","Th",231,90,"Thori-231"],["Np237n","Np",237,93,"Neptuni-237"],["Pu240n","Pu",240,94,"Plutoni-240"],
+  ["Am241n","Am",241,95,"Americi-241"],["Y90m","Y",90,39,"Ytri-90m (trạng thái kích thích)"],
+  ["Cs137mn","Cs",137,55,"Xesi-137m (trạng thái kích thích)"],["Ba140mn","Ba",140,56,"Bari-140m (trạng thái kích thích)"]
+];
+for (const [id, symbol, mass, atomicNumber, name] of KOI_NUCLEAR_ISOTOPES) {
+  if (S[id]) continue;
+  const isomer = /\d+m(?:n)?$/.test(id);
+  S[id] = {f:toSuperscript(mass)+(isomer?"ᵐ":"")+toSubscript(atomicNumber)+symbol,n:name,c:"nuclear",kind:"isotope",z:atomicNumber,a:mass,symbol,nuclearIsomer:isomer};
+}
+
+/* Phản ứng hạt nhân bổ sung: bắt hạt, phản ứng tổng hợp, phân rã và phân hạch
+   mô phỏng. Đây là mô hình bảo toàn số khối/điện tích, không phải hướng dẫn vận hành. */
+const KOI_EXTRA_NUCLEAR_REACTIONS = [
+  {r:["C12n","proton"],p:["N13n","gamma"],cond:"bắt proton",eq:"¹²₆C + ¹₁p → ¹³₇N + γ",note:"Phản ứng bắt proton minh họa."},
+  {r:["N14n","neutron"],p:["N15n","gamma"],cond:"bắt nơtron",eq:"¹⁴₇N + ¹₀n → ¹⁵₇N + γ",note:"Tạo nitơ-15 bằng bắt nơtron."},
+  {r:["O16n","neutron"],p:["O17n","gamma"],cond:"bắt nơtron",eq:"¹⁶₈O + ¹₀n → ¹⁷₈O + γ",note:"Tạo oxi-17 bằng bắt nơtron."},
+  {r:["F19n","proton"],p:["Ne20n","gamma"],cond:"bắt proton",eq:"¹⁹₉F + ¹₁p → ²⁰₁₀Ne + γ",note:"Ví dụ phản ứng bắt proton."},
+  {r:["C12n","alpha"],p:["O16n","gamma"],cond:"bắt hạt alpha",eq:"¹²₆C + ⁴₂He → ¹⁶₈O + γ",note:"Mô phỏng phản ứng tổng hợp hạt nhân."},
+  {r:["O16n","alpha"],p:["Ne20n","gamma"],cond:"bắt hạt alpha",eq:"¹⁶₈O + ⁴₂He → ²⁰₁₀Ne + γ",note:"Mô phỏng quá trình bắt hạt alpha."},
+  {r:["Ne20n","alpha"],p:["Mg24n","gamma"],cond:"bắt hạt alpha",eq:"²⁰₁₀Ne + ⁴₂He → ²⁴₁₂Mg + γ",note:"Mô phỏng tổng hợp hạt nhân ở môi trường năng lượng cao."},
+  {r:["Mg24n","alpha"],p:["Si28n","gamma"],cond:"bắt hạt alpha",eq:"²⁴₁₂Mg + ⁴₂He → ²⁸₁₄Si + γ",note:"Mô phỏng tổng hợp hạt nhân."},
+  {r:["Si28n","alpha"],p:["S32n","gamma"],cond:"bắt hạt alpha",eq:"²⁸₁₄Si + ⁴₂He → ³²₁₆S + γ",note:"Mô phỏng tổng hợp hạt nhân."},
+  {r:["S32n","alpha"],p:["Ar36n","gamma"],cond:"bắt hạt alpha",eq:"³²₁₆S + ⁴₂He → ³⁶₁₈Ar + γ",note:"Mô phỏng tổng hợp hạt nhân."},
+  {r:["Ar36n","alpha"],p:["Ca40n","gamma"],cond:"bắt hạt alpha",eq:"³⁶₁₈Ar + ⁴₂He → ⁴⁰₂₀Ca + γ",note:"Mô phỏng tổng hợp hạt nhân."},
+  {r:["H3n"],p:["He3n","electron","antinu"],cond:"phân rã beta trừ",eq:"³₁H → ³₂He + e⁻ + ν̅ₑ",note:"Triti phân rã beta trừ thành heli-3."},
+  {r:["C14n"],p:["N14n","electron","antinu"],cond:"phân rã beta trừ",eq:"¹⁴₆C → ¹⁴₇N + e⁻ + ν̅ₑ",note:"Cacbon-14 phân rã beta trừ thành nitơ-14."},
+  {r:["Na24n"],p:["Mg24n","electron","antinu"],cond:"phân rã beta trừ",eq:"²⁴₁₁Na → ²⁴₁₂Mg + e⁻ + ν̅ₑ",note:"Natri-24 phân rã beta trừ."},
+  {r:["P32n"],p:["S32n","electron","antinu"],cond:"phân rã beta trừ",eq:"³²₁₅P → ³²₁₆S + e⁻ + ν̅ₑ",note:"Photpho-32 phân rã beta trừ."},
+  {r:["S35n"],p:["Cl35n","electron","antinu"],cond:"phân rã beta trừ",eq:"³⁵₁₆S → ³⁵₁₇Cl + e⁻ + ν̅ₑ",note:"Lưu huỳnh-35 phân rã beta trừ."},
+  {r:["Ar41n"],p:["K41n","electron","antinu"],cond:"phân rã beta trừ",eq:"⁴¹₁₈Ar → ⁴¹₁₉K + e⁻ + ν̅ₑ",note:"Argon-41 phân rã beta trừ."},
+  {r:["Sr90n"],p:["Y90n","electron","antinu"],cond:"phân rã beta trừ",eq:"⁹⁰₃₈Sr → ⁹⁰₃₉Y + e⁻ + ν̅ₑ",note:"Stronti-90 phân rã beta trừ."},
+  {r:["Y90n"],p:["Zr90n","electron","antinu"],cond:"phân rã beta trừ",eq:"⁹⁰₃₉Y → ⁹⁰₄₀Zr + e⁻ + ν̅ₑ",note:"Ytri-90 phân rã beta trừ."},
+  {r:["I131n"],p:["Xe131n","electron","antinu"],cond:"phân rã beta trừ",eq:"¹³¹₅₃I → ¹³¹₅₄Xe + e⁻ + ν̅ₑ",note:"Iot-131 phân rã beta trừ."},
+  {r:["Cs137n"],p:["Ba137mn","electron","antinu"],cond:"phân rã beta trừ",eq:"¹³⁷₅₅Cs → ¹³⁷ᵐ₅₆Ba + e⁻ + ν̅ₑ",note:"Một nhánh phân rã beta của xesi-137 tạo bari-137m."},
+  {r:["F18n"],p:["O18n","positron","nu"],cond:"phân rã beta cộng",eq:"¹⁸₉F → ¹⁸₈O + e⁺ + νₑ",note:"Flo-18 phân rã beta cộng."},
+  {r:["Na22n"],p:["Ne22n","positron","nu"],cond:"phân rã beta cộng",eq:"²²₁₁Na → ²²₁₀Ne + e⁺ + νₑ",note:"Natri-22 có nhánh phân rã beta cộng."},
+  {r:["Rn222n"],p:["Po218n","He4n"],cond:"phân rã alpha",eq:"²²²₈₆Rn → ²¹⁸₈₄Po + ⁴₂He",note:"Radon-222 phân rã alpha."},
+  {r:["Am241n"],p:["Np237n","He4n"],cond:"phân rã alpha",eq:"²⁴¹₉₅Am → ²³⁷₉₃Np + ⁴₂He",note:"Americi-241 phân rã alpha."},
+  {r:["Pu240n"],p:["U236n","He4n"],cond:"phân rã alpha",eq:"²⁴⁰₉₄Pu → ²³⁶₉₂U + ⁴₂He",note:"Plutoni-240 phân rã alpha."},
+  {r:["U235n","neutron"],p:["Ba141n","Kr92n","neutron","neutron","neutron"],cond:"phân hạch — mô hình giáo dục",eq:"²³⁵₉₂U + ¹₀n → ¹⁴¹₅₆Ba + ⁹²₃₆Kr + 3¹₀n",note:"Ví dụ phân hạch lý thuyết; sản phẩm phân hạch thay đổi theo nhánh. Chỉ dùng để học bảo toàn số khối và điện tích."},
+  {r:["U239n"],p:["Np239n","electron","antinu"],cond:"phân rã beta trừ",eq:"²³⁹₉₂U → ²³⁹₉₃Np + e⁻ + ν̅ₑ",note:"Urani-239 phân rã beta trừ thành neptuni-239."},
+  {r:["Np239n"],p:["Pu239n","electron","antinu"],cond:"phân rã beta trừ",eq:"²³⁹₉₃Np → ²³⁹₉₄Pu + e⁻ + ν̅ₑ",note:"Neptuni-239 phân rã beta trừ thành plutoni-239."}
+];
+const koiNuclearReactionKeys = new Set(NX.map(rx => `${[...(rx.r||[])].sort().join("+")}=>${[...(rx.p||[])].sort().join("+")}`));
+for (const rx of KOI_EXTRA_NUCLEAR_REACTIONS) {
+  const key = `${[...(rx.r||[])].sort().join("+")}=>${[...(rx.p||[])].sort().join("+")}`;
+  if (!koiNuclearReactionKeys.has(key)) { NX.push(rx); koiNuclearReactionKeys.add(key); }
+}
+
+/* VÙNG TÙY CHỈNH — sửa các mảng/object dưới đây khi cần.
+   Ví dụ chất mới (bỏ dấu // để sử dụng):
+   DemoCompound: { f:"Na₂CO₃", n:"Natri cacbonat tùy chỉnh", c:"salt" }
+*/
+const MANUAL_SUBSTANCES = {
+  // DemoCompound: { f:"Na₂CO₃", n:"Natri cacbonat tùy chỉnh", c:"salt" }
+};
+const MANUAL_CHEMISTRY_REACTIONS = [
+  // { r:["H2","O2"], p:["H2O"], cond:"đốt cháy", eq:"2H₂ + O₂ → 2H₂O" }
+];
+const MANUAL_NUCLEAR_REACTIONS = [
+  // { r:["C12n","neutron"], p:["C13n","gamma"], cond:"bắt nơtron", eq:"¹²₆C + ¹₀n → ¹³₆C + γ" }
+];
+const REMOVED_SUBSTANCE_IDS = [
+  // "gen_salt_Na_Cl"
+];
+Object.assign(S, MANUAL_SUBSTANCES);
+R.push(...MANUAL_CHEMISTRY_REACTIONS);
+NX.push(...MANUAL_NUCLEAR_REACTIONS);
+if (REMOVED_SUBSTANCE_IDS.length) {
+  const removedIds = new Set(REMOVED_SUBSTANCE_IDS);
+  for (const id of removedIds) delete S[id];
+  for (const collection of [R, NX]) {
+    const kept = collection.filter(rx => [...(rx.r||[]), ...(rx.p||[])].every(id => !removedIds.has(id)));
+    collection.splice(0, collection.length, ...kept);
   }
 }
 
@@ -2835,10 +3573,10 @@ const CATS = [
 ];
 const allIds = Object.keys(S);
 const elementIds = allIds.filter(id=>S[id].c==="element");
-const nuclearParticleIds = allIds.filter(id=>S[id].c==="nuclear" && S[id].kind==="particle");
-const nuclearStarterIds = allIds.filter(id => S[id].c === "nuclear" && S[id].kind === "isotope");
-const extensionStarterIds = ["B","HNO2","N2O4","H2C2O4","Na2C2O4","CaC2O4","KAlSO42","K2CrO4","Na2CrO4","Cu2S","FeS2","Al2S3","PCl3","PCl5","NaH2PO4","Na2HPO4","KH2PO4","K2HPO4","BaHCO32","BaHSO32","BaHSO42","CaHSO42","NaHSO4","KHSO4","MgBr2","MgF2","MgI2","MgNO32","NiSO4","PbSO4","SnSO4","Ni3PO42","Pb3PO42","Sn3PO42","NaO2"];
-let unlocked = new Set([...elementIds,...nuclearParticleIds,...nuclearStarterIds,...extensionStarterIds]);
+// Chemistry progression: only elemental substances are available at the start.
+// Every compound (oxide, acid, base, salt, organic substance, polymer, etc.)
+// stays locked until it appears as a product of a successful reaction.
+let unlocked = new Set(elementIds);
 // Tiến trình mở khóa riêng cho hạt nhân: chỉ mở một nhóm hạt và đồng vị cơ bản ban đầu.
 const nuclearUnlocked = new Set(["neutron","proton","alpha","gamma","H2n","He3n","C12n"]);
 let flask = [];
@@ -2883,7 +3621,8 @@ function updateModeCopy(){
   document.getElementById("inventoryCount").textContent = nuclear ? "Hạt bắn phá + hạt nhân đồng vị" : "Kho chất vô cơ, hữu cơ và polymer";
 }
 
-document.getElementById("fCount").textContent = allIds.length;
+document.getElementById("fCount").textContent = allIds.filter(id => S[id] && S[id].c !== "nuclear").length;
+document.getElementById("nCount").textContent = allIds.filter(id => S[id] && S[id].c === "nuclear").length;
 document.getElementById("fReact").textContent = R.length + NX.length;
 
 function renderTabs(){
@@ -3036,7 +3775,8 @@ function updateStats(){
   const modeIds = allIds.filter(id => (S[id].c === "nuclear") === isNuclear);
   const modeUnlocks = isNuclear ? nuclearUnlocked : unlocked;
   const modeUnlockedCount = modeIds.filter(id => modeUnlocks.has(id)).length;
-  document.getElementById("fCount").textContent = allIds.length;
+  document.getElementById("fCount").textContent = allIds.filter(id => S[id] && S[id].c !== "nuclear").length;
+  document.getElementById("nCount").textContent = allIds.filter(id => S[id] && S[id].c === "nuclear").length;
   document.getElementById("fReact").textContent = R.length + NX.length;
   document.getElementById("statUnlocked").textContent = modeUnlockedCount + "/" + modeIds.length;
   document.getElementById("statReactions").textContent = reactionCount;
