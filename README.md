@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title>Phòng Thí Nghiệm — Ghép Chất</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1059,256 +1059,27 @@ body { max-width: none !important; }
   .grid { gap: 6px !important; }
 }
 
-/* Điện thoại đang cầm dọc: xoay khung ứng dụng, nhưng không thu nhỏ chữ quá mức */
-@media (orientation: portrait) and (max-width: 900px) {
-  body {
-    position: fixed;
-    inset: auto;
-    top: 0;
-    left: 0;
-    width: 100dvh;
-    height: 100vw;
-    min-width: 0;
-    min-height: 0;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    transform: rotate(90deg) translateY(-100%);
-    transform-origin: top left;
-  }
-  .topbar {
-    width: 100%;
-    height: 38px;
-    min-height: 38px;
-    flex: 0 0 38px;
-    padding: 3px 7px !important;
-  }
-  .home-origin-btn { min-height: 31px; padding: 3px 10px 3px 4px; gap: 6px; }
-  .home-origin-btn .btn-icon { width: 25px; height: 25px; }
-  .home-origin-btn .btn-text small { font-size: 7px; }
-  .home-origin-btn .btn-text strong { font-size: 12px; }
-  .wrap {
-    width: 100%;
-    height: calc(100% - 38px);
-    min-height: 0;
-    flex: 1 1 auto;
-    padding: 4px 6px 5px !important;
-    gap: 4px !important;
-    grid-template-rows: minmax(54px, auto) minmax(43px, auto) minmax(10px, auto) minmax(0, 1fr);
-  }
-  .wrap > header:not(.topbar) {
-    min-height: 54px;
-    padding: 6px 10px;
-    gap: 7px;
-    border-radius: 10px;
-  }
-  .brand { gap: 7px; }
-  .flaskmark { width: 32px; height: 32px; padding: 3px; }
-  h1 { font-size: 1rem; line-height: 1.08; }
-  .sub { font-size: .62rem; line-height: 1.2; margin-top: 3px; }
-  .wrap > header:not(.topbar) .brand::after { display: none; }
-  .stats { gap: 4px; }
-  .stats > div { min-width: 68px; padding: 4px 6px; font-size: .48rem; border-radius: 7px; }
-  .stats b { font-size: .78rem; margin-top: 1px; }
-  .mode-strip { min-height: 43px; padding: 5px 8px; gap: 6px; border-radius: 9px; }
-  .eyebrow { font-size: .48rem; letter-spacing: .06em; }
-  .mode-copy strong { font-size: .72rem; line-height: 1.15; }
-  .mode-copy > span:last-child { max-width: 310px; font-size: .54rem; line-height: 1.15; }
-  .mode-switch { flex: 0 0 auto; padding: 2px; gap: 2px; border-radius: 7px; }
-  .mode-button { padding: 6px 8px; gap: 4px; border-radius: 6px; font-size: .58rem; }
-  .mode-button .mode-icon { font-size: .7rem; }
-  .mode-disclaimer { min-height: 10px; padding: 0 3px; font-size: .48rem; line-height: 1.1; }
-  .disclaimer-dot { width: 4px; height: 4px; }
-  .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px !important; }
-  .grid > .panel,
-  .grid > div:last-child > .panel { padding: 6px; border-radius: 9px; }
-  .grid > div:last-child { grid-template-rows: minmax(0, 1.13fr) minmax(0, .87fr); gap: 6px; }
-  .panel h2 { font-size: .57rem; letter-spacing: .06em; margin-bottom: 5px; }
-  .panel h2::before { width: 4px; height: 4px; }
-  .inventory-meta { margin: 0 0 4px; gap: 4px; font-size: .48rem; }
-  .searchbox { height: 27px; min-height: 27px; flex-basis: 27px; padding: 4px 7px; margin-bottom: 4px; font-size: .58rem; border-radius: 6px; }
-  .tabs { gap: 3px; margin-bottom: 4px; padding-bottom: 2px; }
-  .tab { padding: 4px 6px; font-size: .5rem; border-radius: 9px; }
-  .tiles { grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 4px; padding: 1px 2px 3px 0; }
-  .tile { min-height: 42px; padding: 6px 3px 4px; border-radius: 6px; }
-  .tile .catbar { height: 2px; }
-  .tile .f { font-size: .68rem; margin-bottom: 2px; }
-  .tile .n { font-size: .48rem; line-height: 1.08; }
-  .tile.locked::before { top: 2px; right: 3px; font-size: .52rem; }
-  .tiles.periodic-grid { grid-template-columns: repeat(18, minmax(0, 1fr)); grid-auto-rows: minmax(29px, 1fr); gap: 1px; }
-  .periodic-cell { min-height: 29px; padding: 5px 0 2px; }
-  .periodic-cell .atomic-number { top: 1px; left: 1px; font-size: .3rem; }
-  .periodic-cell .f { font-size: .46rem; margin-bottom: 1px; }
-  .periodic-cell .n { font-size: .29rem; max-height: 10px; }
-  .flaskzone { min-height: 32px; max-height: 49px; padding: 4px; gap: 3px; margin-bottom: 4px; border-radius: 6px; }
-  .flaskzone.empty::before { font-size: .54rem; }
-  .chip { padding: 3px 5px; font-size: .54rem; gap: 3px; }
-  .chip .f { font-size: .58rem; }
-  .chip .x { font-size: .52rem; }
-  .actions { gap: 4px; margin: 3px 0 4px; }
-  .btn, .btn.ghost { padding: 6px 7px; font-size: .55rem; border-radius: 6px; }
-  .result { padding: 6px; border-radius: 7px; margin-bottom: 3px; }
-  .result .eqline { font-size: .66rem; line-height: 1.25; }
-  .result .cond, .result .nuclear-note, .result .unlockline { font-size: .51rem; line-height: 1.25; margin-top: 3px; }
-  .log { gap: 3px; }
-  .logitem { padding: 4px 5px; font-size: .49rem; line-height: 1.2; }
-  .logitem b { font-size: .52rem; line-height: 1.2; }
-  .logitem .lcond { font-size: .44rem; margin-top: 2px; }
-}
-
-
 
 /* =========================================================
-   KOI LAB · TRUE EDGE-TO-EDGE VIEWPORT FIX
-   This block intentionally comes last to override older layered patches.
-   Keeps inner panels and their controls intact; removes the page frame.
-   ========================================================= */
-html {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-width: 0;
-  min-height: 0;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-  background: #f3ecdf;
-}
-
-html, body, *, *::before, *::after {
-  box-sizing: border-box;
-}
-
-body {
-  position: fixed !important;
-  inset: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  height: 100dvh !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  outline: 0 !important;
-  max-width: none !important;
-  overflow: hidden !important;
-  transform: none;
-  background-clip: border-box;
-}
-
-.topbar {
-  position: relative;
-  z-index: 2;
-  flex: 0 0 var(--lab-topbar, 52px) !important;
-  width: 100% !important;
-  height: var(--lab-topbar, 52px) !important;
-  min-height: var(--lab-topbar, 52px) !important;
-  max-width: none !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-}
-
-.wrap {
-  position: relative;
-  flex: 1 1 0 !important;
-  width: 100% !important;
-  height: calc(100vh - var(--lab-topbar, 52px)) !important;
-  height: calc(100dvh - var(--lab-topbar, 52px)) !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  outline: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  overflow: hidden !important;
-}
-
-/* Header spans the viewport edge-to-edge instead of looking like a card
-   floating inside an outer frame. */
-.wrap > header:not(.topbar) {
-  width: 100% !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-radius: 0 !important;
-}
-
-.grid {
-  width: 100% !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-}
-
-footer {
-  display: none !important;
-}
-
-/* Phone held vertically: rotate the app canvas once, fill the physical
-   screen, and keep the top bar inside the rotated canvas. */
-@media (orientation: portrait) and (max-width: 900px) {
-  :root { --lab-topbar: 38px; }
-
-  body {
-    inset: auto !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: auto !important;
-    bottom: auto !important;
-    width: 100vh !important;
-    width: 100dvh !important;
-    height: 100vw !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    transform: rotate(90deg) translateY(-100%) !important;
-    transform-origin: top left !important;
-  }
-
-  .topbar {
-    flex: 0 0 38px !important;
-    width: 100% !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
-  }
-
-  .wrap {
-    flex: 0 0 calc(100vw - 38px) !important;
-    width: 100% !important;
-    height: calc(100vw - 38px) !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-  }
-
-  .wrap > header:not(.topbar) {
-    border-radius: 0 !important;
-  }
-}
-
-
-/* =========================================================
-   KOI LAB · FINAL VIEWPORT LOCK
-   Final override: remove the outer frame, use the whole screen,
-   and keep the landscape layout on narrow portrait phones.
+   KOI LAB · SINGLE VIEWPORT LAYOUT
+   Một khung ứng dụng duy nhất, không có hàng lề phía trên.
+   Chỉ danh sách chất / kết quả / nhật ký được cuộn riêng.
    ========================================================= */
 :root {
-  --lab-topbar: 44px;
-  --edge-gap: clamp(0px, .35vw, 5px);
+  --lab-bg: #f3ecdf;
+  --lab-paper: #fffaf2;
+  --lab-ink: #2b211c;
+  --lab-muted: #877565;
+  --lab-red: #ad2932;
+  --lab-red-dark: #79202a;
+  --lab-gold: #c69a58;
+  --lab-line: #dfcfb8;
+  --lab-gap: clamp(3px, .45vw, 7px);
 }
-html,
-body {
+html, body, *, *::before, *::after {
   box-sizing: border-box !important;
+}
+html, body {
   width: 100% !important;
   height: 100% !important;
   min-width: 0 !important;
@@ -1316,20 +1087,18 @@ body {
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
-  outline: 0 !important;
   overflow: hidden !important;
   overscroll-behavior: none !important;
 }
 html {
   position: fixed !important;
   inset: 0 !important;
-  background: #f3ecdf !important;
+  background: var(--lab-bg) !important;
 }
 body {
   position: fixed !important;
-  inset: 0 auto auto 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
+  inset: 0 !important;
+  display: block !important;
   width: 100vw !important;
   height: 100vh !important;
   height: 100dvh !important;
@@ -1337,124 +1106,274 @@ body {
   transform: none !important;
   background: linear-gradient(135deg, #f8f2e8 0%, #eee2d0 100%) !important;
 }
-*,
-*::before,
-*::after {
-  box-sizing: border-box !important;
+
+/* Main app touches the viewport edges: no wrapper padding or max-width. */
+.wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  display: grid !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  gap: var(--lab-gap) !important;
+  grid-template-rows:
+    clamp(66px, 11dvh, 88px)
+    clamp(42px, 7dvh, 60px)
+    clamp(9px, 1.7dvh, 13px)
+    minmax(0, 1fr) !important;
 }
-.topbar {
-  position: relative !important;
-  z-index: 20 !important;
+
+/* Title, counters, Home and fullscreen controls share one compact top row. */
+.wrap > header:not(.topbar) {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 8px !important;
-  flex: 0 0 var(--lab-topbar) !important;
+  gap: clamp(6px, .9vw, 14px) !important;
   width: 100% !important;
-  height: var(--lab-topbar) !important;
-  min-height: var(--lab-topbar) !important;
-  max-width: none !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
   margin: 0 !important;
-  padding: 2px 6px !important;
-  border: 0 !important;
+  padding: clamp(5px, .8vw, 13px) clamp(7px, 1vw, 16px) !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
   border-radius: 0 !important;
+  overflow: hidden !important;
 }
-.topbar .home-origin-btn {
+.brand {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  gap: clamp(6px, .8vw, 13px) !important;
+}
+.flaskmark { flex: 0 0 auto !important; }
+h1 {
+  max-width: 100% !important;
+  font-size: clamp(1.05rem, 3.7dvh, 1.8rem) !important;
+  line-height: 1.05 !important;
+  white-space: nowrap !important;
+}
+.sub {
+  max-width: 52vw !important;
+  margin-top: 4px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: clamp(.58rem, 1.35dvh, .76rem) !important;
+  line-height: 1.2 !important;
+}
+.stats {
+  display: flex !important;
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  gap: clamp(3px, .5vw, 8px) !important;
+}
+.stats > div {
+  min-width: clamp(56px, 7.5vw, 104px) !important;
+  padding: clamp(4px, .7vw, 9px) clamp(5px, .8vw, 12px) !important;
+  border-radius: 10px !important;
+  font-size: clamp(.43rem, .7vw, .64rem) !important;
+}
+.stats b { font-size: clamp(.72rem, 1.5vw, 1.15rem) !important; }
+.header-tools {
+  display: flex !important;
   flex: 0 0 auto !important;
-  margin: 0 !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: clamp(4px, .5vw, 8px) !important;
+  min-width: 0 !important;
 }
+.home-origin-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  min-height: 32px !important;
+  margin: 0 !important;
+  padding: 3px 9px 3px 4px !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #30241f, #1f1917) !important;
+  color: #fff8ed !important;
+  box-shadow: 0 3px 10px rgba(51,30,22,.12) !important;
+  white-space: nowrap !important;
+}
+.home-origin-btn .btn-icon {
+  display: grid !important;
+  place-items: center !important;
+  flex: 0 0 auto !important;
+  width: 25px !important;
+  height: 25px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #efd69c, #c48d43) !important;
+  color: #38251c !important;
+}
+.home-origin-btn .btn-icon::before { content: "⌂"; font-size: 16px; font-weight: 700; }
+.home-origin-btn .btn-text { display: flex !important; flex-direction: column !important; }
+.home-origin-btn .btn-text small { font-size: 7px !important; letter-spacing: .12em !important; }
+.home-origin-btn .btn-text strong { font-size: 11px !important; }
 .fullscreen-btn {
   display: inline-flex !important;
   flex: 0 0 auto !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 7px !important;
-  min-height: 30px !important;
-  max-width: 48vw !important;
-  padding: 5px 11px !important;
-  margin: 0 0 0 auto !important;
+  min-height: 32px !important;
+  max-width: 44vw !important;
+  padding: 5px 9px !important;
+  margin: 0 !important;
   border: 1px solid rgba(121, 32, 42, .22) !important;
   border-radius: 999px !important;
   background: #fffaf2 !important;
   color: #79202a !important;
-  box-shadow: 0 2px 9px rgba(43, 33, 28, .08) !important;
-  font: 700 11px/1.1 system-ui, sans-serif !important;
+  box-shadow: 0 2px 8px rgba(43,33,28,.08) !important;
+  font: 700 10px/1.1 system-ui, sans-serif !important;
   white-space: nowrap !important;
   cursor: pointer !important;
 }
-.fullscreen-btn:hover { background: #f8eadd !important; }
-.wrap {
-  position: relative !important;
-  display: grid !important;
-  flex: 1 1 0 !important;
+
+.mode-strip {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
   width: 100% !important;
-  height: calc(100vh - var(--lab-topbar)) !important;
-  height: calc(100dvh - var(--lab-topbar)) !important;
   min-width: 0 !important;
   min-height: 0 !important;
-  max-width: none !important;
   margin: 0 !important;
-  padding: var(--edge-gap) !important;
-  border: 0 !important;
-  outline: 0 !important;
+  padding: clamp(4px, .9dvh, 9px) clamp(7px, 1vw, 14px) !important;
   border-radius: 0 !important;
-  box-shadow: none !important;
+  gap: clamp(5px, .8vw, 14px) !important;
   overflow: hidden !important;
-  gap: clamp(4px, .55vw, 9px) !important;
-  grid-template-rows: minmax(74px, auto) minmax(50px, auto) minmax(10px, auto) minmax(0, 1fr) !important;
 }
-.wrap > header:not(.topbar) {
+.mode-copy { min-width: 0 !important; gap: 2px !important; }
+.mode-copy strong { font-size: clamp(.68rem, 1.8dvh, .92rem) !important; line-height: 1.15 !important; }
+.mode-copy > span:last-child {
+  max-width: 55vw !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: clamp(.5rem, 1.25dvh, .68rem) !important;
+}
+.mode-switch { flex: 0 0 auto !important; min-width: 0 !important; }
+.mode-button { white-space: nowrap !important; }
+.mode-disclaimer {
+  display: flex !important;
+  align-items: center !important;
   width: 100% !important;
   min-width: 0 !important;
   min-height: 0 !important;
   margin: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-radius: clamp(0px, .7vw, 12px) !important;
+  padding: 0 6px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  font-size: clamp(.43rem, 1.05dvh, .58rem) !important;
 }
-.mode-strip,
-.mode-disclaimer,
+
+/* Chemistry and nuclear modes use the same full-size workspace. */
 .grid {
+  display: grid !important;
   width: 100% !important;
-  min-width: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-.grid {
-  min-height: 0 !important;
   height: 100% !important;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-  gap: clamp(5px, .6vw, 10px) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr) !important;
+  align-items: stretch !important;
+  gap: var(--lab-gap) !important;
+  overflow: hidden !important;
 }
 .grid > .panel,
 .grid > div:last-child,
 .grid > div:last-child > .panel {
   min-width: 0 !important;
   min-height: 0 !important;
+  margin: 0 !important;
 }
 .grid > .panel,
 .grid > div:last-child > .panel {
-  padding: clamp(7px, .75vw, 13px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: clamp(6px, .75vw, 12px) !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
 }
-.tiles { min-width: 0 !important; max-width: 100% !important; }
+.grid > div:last-child {
+  display: grid !important;
+  grid-template-rows: minmax(0, 1.12fr) minmax(0, .88fr) !important;
+  gap: var(--lab-gap) !important;
+  overflow: hidden !important;
+}
+.panel h2 {
+  flex: 0 0 auto !important;
+  margin: 0 0 clamp(4px, .65vh, 9px) !important;
+  font-size: clamp(.54rem, .66vw, .68rem) !important;
+}
+.inventory-meta { flex: 0 0 auto !important; margin: 0 0 5px !important; }
+.searchbox { flex: 0 0 32px !important; height: 32px !important; min-height: 32px !important; margin: 0 0 6px !important; }
+.tabs {
+  flex: 0 0 auto !important;
+  flex-wrap: nowrap !important;
+  margin: 0 0 6px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+.tab { flex: 0 0 auto !important; white-space: nowrap !important; }
+.tiles {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  max-height: none !important;
+  overflow: auto !important;
+  overscroll-behavior: contain !important;
+}
+.tiles.periodic-grid {
+  min-width: 0 !important;
+  grid-template-columns: repeat(18, minmax(0, 1fr)) !important;
+  overflow: auto !important;
+}
+.flaskzone { flex: 0 0 auto !important; margin-bottom: 6px !important; }
+.actions { flex: 0 0 auto !important; margin: 4px 0 7px !important; }
+#resultArea { flex: 1 1 0 !important; min-height: 0 !important; overflow: auto !important; overscroll-behavior: contain !important; }
+.log { flex: 1 1 0 !important; min-height: 0 !important; max-height: none !important; overflow: auto !important; overscroll-behavior: contain !important; }
+.logitem { flex: 0 0 auto !important; }
 footer { display: none !important; }
 
-/* Use a little more of a regular desktop / laptop display. */
-@media (min-width: 1000px) and (min-height: 650px) and (orientation: landscape) {
-  :root { --lab-topbar: 46px; --edge-gap: 3px; }
+/* Compact landscape displays: preserve the same full-screen geometry. */
+@media (max-height: 700px) and (orientation: landscape) {
   .wrap {
-    grid-template-rows: minmax(86px, auto) minmax(58px, auto) minmax(12px, auto) minmax(0, 1fr) !important;
-    gap: 7px !important;
+    grid-template-rows: 58px 39px 9px minmax(0, 1fr) !important;
+    gap: 3px !important;
   }
-  .wrap > header:not(.topbar) { padding: 14px 22px !important; }
-  .grid > .panel,
-  .grid > div:last-child > .panel { padding: 12px !important; }
-  .tile { min-height: 60px; }
+  .wrap > header:not(.topbar) { padding: 4px 8px !important; }
+  .flaskmark { width: 34px !important; height: 34px !important; padding: 3px !important; }
+  h1 { font-size: clamp(.9rem, 3.5dvh, 1.25rem) !important; }
+  .sub { margin-top: 2px !important; font-size: .55rem !important; }
+  .stats > div { min-width: 57px !important; padding: 3px 5px !important; font-size: .43rem !important; }
+  .stats b { font-size: .76rem !important; }
+  .home-origin-btn { min-height: 27px !important; padding: 2px 6px 2px 3px !important; gap: 4px !important; }
+  .home-origin-btn .btn-icon { width: 21px !important; height: 21px !important; }
+  .home-origin-btn .btn-text small { font-size: 5px !important; }
+  .home-origin-btn .btn-text strong { font-size: 9px !important; }
+  .fullscreen-btn { min-height: 27px !important; padding: 4px 6px !important; font-size: 9px !important; }
+  .mode-strip { padding: 3px 7px !important; }
+  .mode-button { padding: 5px 7px !important; font-size: .54rem !important; }
+  .mode-copy strong { font-size: .68rem !important; }
+  .mode-copy > span:last-child { font-size: .49rem !important; }
+  .searchbox { flex-basis: 25px !important; height: 25px !important; min-height: 25px !important; }
+  .grid > .panel, .grid > div:last-child > .panel { padding: 5px !important; }
 }
 
-/* Portrait phone: rotate a single viewport-sized canvas into landscape. */
+/* On a portrait phone, rotate the whole app canvas exactly once. */
 @media (orientation: portrait) and (max-width: 900px) {
-  :root { --lab-topbar: 36px; --edge-gap: 2px; }
   body {
     inset: auto auto auto 0 !important;
     top: 0 !important;
@@ -1466,65 +1385,59 @@ footer { display: none !important; }
     transform: rotate(90deg) translateY(-100%) !important;
     transform-origin: top left !important;
   }
-  .topbar {
-    flex-basis: 36px !important;
-    width: 100% !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    padding: 2px 5px !important;
-  }
-  .home-origin-btn { min-height: 28px !important; padding: 2px 8px 2px 3px !important; gap: 5px !important; }
-  .home-origin-btn .btn-icon { width: 23px !important; height: 23px !important; }
-  .home-origin-btn .btn-text small { font-size: 6px !important; }
-  .home-origin-btn .btn-text strong { font-size: 11px !important; }
-  .fullscreen-btn { min-height: 25px !important; padding: 4px 8px !important; font-size: 10px !important; }
   .wrap {
-    flex: 0 0 calc(100vw - 36px) !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    height: calc(100vw - 36px) !important;
-    min-height: 0 !important;
-    padding: 2px !important;
+    height: 100% !important;
+    grid-template-rows: 62px 39px 9px minmax(0, 1fr) !important;
     gap: 3px !important;
-    grid-template-rows: minmax(48px, auto) minmax(38px, auto) minmax(8px, auto) minmax(0, 1fr) !important;
   }
-  .wrap > header:not(.topbar) { min-height: 0 !important; padding: 5px 8px !important; border-radius: 7px !important; }
-  .flaskmark { width: 29px !important; height: 29px !important; padding: 3px !important; }
-  h1 { font-size: .95rem !important; line-height: 1.05 !important; }
-  .sub { font-size: .58rem !important; line-height: 1.15 !important; margin-top: 2px !important; }
-  .stats { gap: 3px !important; }
-  .stats > div { min-width: 60px !important; padding: 4px 5px !important; font-size: .44rem !important; }
-  .stats b { font-size: .73rem !important; }
-  .mode-strip { min-height: 0 !important; padding: 4px 6px !important; gap: 5px !important; border-radius: 6px !important; }
-  .mode-copy strong { font-size: .68rem !important; }
-  .mode-copy > span:last-child { font-size: .48rem !important; line-height: 1.1 !important; }
-  .mode-button { padding: 5px 7px !important; font-size: .52rem !important; }
-  .mode-disclaimer { font-size: .43rem !important; line-height: 1 !important; }
-  .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 4px !important; }
-  .grid > .panel,
-  .grid > div:last-child > .panel { padding: 5px !important; border-radius: 6px !important; }
-  .grid > div:last-child { gap: 4px !important; }
-  .panel h2 { font-size: .49rem !important; margin-bottom: 4px !important; }
-  .searchbox { height: 24px !important; min-height: 24px !important; flex-basis: 24px !important; font-size: .53rem !important; }
-  .tiles { grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)) !important; gap: 3px !important; }
-  .tile { min-height: 38px !important; padding: 5px 3px !important; }
-  .tile .f { font-size: .62rem !important; }
-  .tile .n { font-size: .43rem !important; }
-  .btn, .btn.ghost { padding: 5px 6px !important; font-size: .5rem !important; }
+  .wrap > header:not(.topbar) { padding: 4px 6px !important; gap: 4px !important; }
+  .flaskmark { width: 30px !important; height: 30px !important; padding: 2px !important; }
+  h1 { font-size: 1rem !important; }
+  .sub { max-width: 29vw !important; font-size: .48rem !important; }
+  .stats { gap: 2px !important; }
+  .stats > div { min-width: 52px !important; padding: 3px 4px !important; font-size: .39rem !important; border-radius: 5px !important; }
+  .stats b { font-size: .67rem !important; }
+  .header-tools { gap: 3px !important; }
+  .home-origin-btn { min-height: 24px !important; padding: 2px 4px 2px 2px !important; gap: 3px !important; }
+  .home-origin-btn .btn-icon { width: 19px !important; height: 19px !important; }
+  .home-origin-btn .btn-text small { font-size: 4px !important; }
+  .home-origin-btn .btn-text strong { font-size: 7px !important; }
+  .fullscreen-btn { min-height: 24px !important; padding: 3px 4px !important; max-width: none !important; font-size: 7px !important; }
+  .mode-strip { padding: 3px 6px !important; gap: 4px !important; }
+  .mode-copy strong { font-size: .65rem !important; }
+  .mode-copy > span:last-child { max-width: 30vw !important; font-size: .45rem !important; }
+  .mode-button { padding: 4px 6px !important; font-size: .49rem !important; }
+  .mode-disclaimer { padding: 0 3px !important; font-size: .42rem !important; }
+  .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 3px !important; }
+  .grid > .panel, .grid > div:last-child > .panel { padding: 4px !important; }
+  .grid > div:last-child { gap: 3px !important; }
+  .panel h2 { font-size: .47rem !important; margin-bottom: 3px !important; }
+  .inventory-meta { margin-bottom: 3px !important; font-size: .42rem !important; }
+  .searchbox { flex-basis: 22px !important; height: 22px !important; min-height: 22px !important; margin-bottom: 3px !important; padding: 3px 5px !important; font-size: .47rem !important; }
+  .tabs { gap: 2px !important; margin-bottom: 3px !important; }
+  .tab { padding: 3px 5px !important; font-size: .43rem !important; }
+  .tiles { grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)) !important; gap: 2px !important; padding: 1px !important; }
+  .tile { min-height: 34px !important; padding: 4px 2px !important; }
+  .tile .f { font-size: .56rem !important; }
+  .tile .n { font-size: .39rem !important; }
+  .flaskzone { min-height: 26px !important; max-height: 42px !important; padding: 3px !important; margin-bottom: 3px !important; }
+  .chip { padding: 2px 4px !important; font-size: .46rem !important; }
+  .actions { gap: 3px !important; margin: 2px 0 3px !important; }
+  .btn, .btn.ghost { padding: 4px 5px !important; font-size: .46rem !important; }
+  .result { padding: 4px !important; margin-bottom: 2px !important; }
+  .result .eqline { font-size: .56rem !important; }
+  .result .cond, .result .nuclear-note, .result .unlockline { font-size: .43rem !important; }
+  .logitem { padding: 3px 4px !important; font-size: .43rem !important; }
+  .logitem b { font-size: .46rem !important; }
+  .logitem .lcond { font-size: .4rem !important; }
 }
 
 </style>
 </head>
-<body>
-  <header class="topbar"> 
-    <button class="home-origin-btn" onclick="window.location.href='https://2410phongnguyen-eng.github.io/Koi/'">
-    <span class="btn-icon"></span>
-    <span class="btn-text">
-        <small>TRANG CHỦ</small>
-        <strong>Nishiki Hub</strong>
-    </span>
-</button>
-  </header>
-<div class="wrap">
+<body><div class="wrap">
 
 <header>
   <div class="brand">
@@ -1543,6 +1456,15 @@ footer { display: none !important; }
   <div class="stats">
     <div>Đã mở khoá<b id="statUnlocked">0/0</b></div>
     <div>Phản ứng đã xảy ra<b id="statReactions">0</b></div>
+  </div>
+  <div class="header-tools">
+    <button class="home-origin-btn" onclick="window.location.href='https://2410phongnguyen-eng.github.io/Koi/'">
+    <span class="btn-icon"></span>
+    <span class="btn-text">
+        <small>TRANG CHỦ</small>
+        <strong>Nishiki Hub</strong>
+    </span>
+</button>
   </div>
 </header>
 
@@ -4593,8 +4515,8 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 /* One-tap browser fullscreen; user gesture is required by browsers. */
 (() => {
-  const bar = document.querySelector('.topbar');
-  if (!bar || document.querySelector('.fullscreen-btn')) return;
+  const tools = document.querySelector('.header-tools');
+  if (!tools || document.querySelector('.fullscreen-btn')) return;
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'fullscreen-btn';
@@ -4622,7 +4544,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderLabel();
   });
   document.addEventListener('fullscreenchange', renderLabel);
-  bar.appendChild(button);
+  tools.appendChild(button);
   renderLabel();
 })();
 </script>
